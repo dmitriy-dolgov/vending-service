@@ -1,8 +1,11 @@
 <?php
 
+use helpers\Html;
+use lib\items\Equipment;
+
 require_once __DIR__ . '/../html/header.php';
 
-
+$e = Equipment::getItems();
 
 ?>
 
@@ -23,7 +26,13 @@ require_once __DIR__ . '/../html/header.php';
         </div>
         <div class="row fields-row mt-3">
             <div class="col-lg col-md-4 col-sm-6 order-lg-1 mt-sm-0">
-                <input type="text" placeholder="Тип оборудования" class="form-control">
+                <!--<input type="text" placeholder="Тип оборудования" class="form-control">-->
+                <select class="combobox form-control">
+                    <option></option>
+                    <?php foreach (Equipment::getItems() as $item): ?>
+                        <option><?= Html::encode(); ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="col-lg col-md-4 col-sm-6 order-lg-2 mt-sm-0 mt-2">
                 <input type="text" placeholder="Город" class="form-control">

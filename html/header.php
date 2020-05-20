@@ -34,6 +34,7 @@ spl_autoload_register();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-combobox.css"/>
 
 </head>
 <body>
