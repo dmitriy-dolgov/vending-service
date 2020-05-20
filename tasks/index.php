@@ -1,12 +1,15 @@
 <?php
 
 require_once __DIR__ . '/../html/header.php';
+
+
+
 ?>
 
     <form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid">
         <div class="row">
             <div class="col-xl-2 col-lg-3 col-sm-12 col-6">
-                <h1 class="page-title">Все задачи (485)</h1>
+                <h1 class="page-title">Все задачи (<span class="task-amount"></span>)</h1>
             </div>
             <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-sm-2">
                 <button class="btn app-btn btn-primary-dark" type="button">Добавить задачу</button>
