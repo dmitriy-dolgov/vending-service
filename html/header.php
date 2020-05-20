@@ -3,7 +3,7 @@ define('LM_DEBUG', true);
 
 define('APP_DIR', realpath(__DIR__ . '/..') . '/');
 
-require APP_DIR . 'vendor/autoload.php';
+//require APP_DIR . 'vendor/autoload.php';
 
 ini_set('log_errors', 1);
 ini_set('error_log', APP_DIR . 'runtime/log/php-livemaster-error.log');
@@ -15,12 +15,18 @@ if (LM_DEBUG) {
     ini_set('display_errors', 0);
 }
 
-spl_autoload_extensions('.inc,.php');
+spl_autoload_extensions('.php');
 
+//set_include_path(get_include_path() . PATH_SEPARATOR . realpath(__DIR__ . '/../'));
 set_include_path(get_include_path() . PATH_SEPARATOR . realpath(__DIR__ . '/../'));
+
+//echo get_include_path();exit;
 
 // PSR-0
 spl_autoload_register();
+
+require APP_DIR . 'vendor/autoload.php';
+
 ?>
 <!doctype html>
 <html lang="ru">

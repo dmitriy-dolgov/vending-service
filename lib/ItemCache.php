@@ -11,6 +11,8 @@ abstract class ItemCache
 
     abstract protected function getItemsFromPrimaryRepository();
 
+    abstract protected function ifDataValid($data);
+
 
     protected function getCachedFilePath()
     {
@@ -26,11 +28,18 @@ abstract class ItemCache
         if (is_file($cfp)) {
             if ($itemsInfoJson = file_get_contents($cfp)) {
                 $itemsInfoArr = json_decode($itemsInfoJson, true);
+                if (!$this->ifDataValid($itemsInfoArr)) {
+                    unlink($cfp);
+                    return null;
+                }
             }
         }
 
         if ($itemsInfoArr === null) {
             $itemsInfoArr = $this->getItemsFromPrimaryRepository();
+            if (!$this->ifDataValid($itemsInfoArr)) {
+                return null;
+            }
             file_put_contents($cfp, json_encode($itemsInfoArr));
         }
 

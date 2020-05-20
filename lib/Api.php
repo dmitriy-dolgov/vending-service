@@ -7,7 +7,7 @@ class Api
     const API_URL = 'http://178.57.218.210:4001/';
 
     // для пароля test/test1
-    protected $apiKey = 'TS3qVh70xrM59VC9OxqK3UZV';
+    const API_KEY = 'TS3qVh70xrM59VC9OxqK3UZV';
 
 
     public function command(string $method, string $path, array $query = [])

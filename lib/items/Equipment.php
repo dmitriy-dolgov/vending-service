@@ -9,23 +9,31 @@ class Equipment extends ItemCache
 {
     protected $api;
 
+    public function __construct()
+    {
+        $this->api = new Api();
+    }
 
     protected function getUniqueName()
     {
         return 'equipment';
     }
 
-    public function __construct()
-    {
-        $this->api = new Api();
-    }
-
     protected function getItemsFromPrimaryRepository()
     {
-        return Api::command('get', 'machines');
+        return $this->api->command('get', 'machines', ['token' => Api::API_KEY]);
     }
 
-    public function getList()
+    protected function ifDataValid($data)
+    {
+        if (!$data || (isset($data['result']) && $data['result'] == 'auth failed')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getItems()
     {
         $items = parent::getItems();
         return $items;

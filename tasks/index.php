@@ -1,11 +1,12 @@
 <?php
 
+require_once __DIR__ . '/../html/header.php';
+
 use helpers\Html;
 use lib\items\Equipment;
 
-require_once __DIR__ . '/../html/header.php';
-
-$e = Equipment::getItems();
+$e = new Equipment();
+$sdf = $e->getItems();
 
 ?>
 
@@ -29,8 +30,8 @@ $e = Equipment::getItems();
                 <!--<input type="text" placeholder="Тип оборудования" class="form-control">-->
                 <select class="combobox form-control">
                     <option></option>
-                    <?php foreach (Equipment::getItems() as $item): ?>
-                        <option><?= Html::encode(); ?></option>
+                    <?php foreach ((new Equipment())->getItems() as $item): ?>
+                        <option value="<?= Html::encode($item['id']) ?>"><?= Html::encode($item['model']) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
