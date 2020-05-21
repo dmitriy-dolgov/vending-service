@@ -27,6 +27,8 @@ $(document).ready(function(){
     $('.filter-executor-type').attr('placeholder', 'Исполнитель');
     $('.filter-status-type').attr('placeholder', 'Статус');
     
+    
+    $('#sel-statuses').multiSelect();
 });
 JS;
 ?>
@@ -68,16 +70,35 @@ JS;
             <div class="col-lg col-sm-4 order-lg-4 mt-lg-0 mt-sm-3 mt-2">
                 <select id="filter-creator" class="filter-creator-type combobox form-control " placeholder="Создатель">
                     <option></option>
-                    <?php foreach ((new Users())->getItems() as $key => $item): ?>
-                        <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
+                    <?php
+                    foreach ((new Users())->getItems() as $item):
+                        if (!$uName = trim($item['name'])) {
+                            if (!$uName = trim($item['phone_number'])) {
+                                if (!$uName = trim($item['email'])) {
+                                    $uName = '- нет данных -';
+                                }
+                            }
+                        }
+                        ?>
+                        <option value="<?= $item['id'] ?>"><?= Html::encode($uName) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="col-lg col-sm-4 order-lg-5 mt-lg-0 mt-sm-3 mt-2">
-                <select id="filter-creator" class="filter-executor-type combobox form-control " placeholder="Исполнитель">
+                <select id="filter-creator" class="filter-executor-type combobox form-control "
+                        placeholder="Исполнитель">
                     <option></option>
-                    <?php foreach ((new Users())->getItems() as $key => $item): ?>
-                        <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
+                    <?php
+                    foreach ((new Users())->getItems() as $item):
+                        if (!$uName = trim($item['name'])) {
+                            if (!$uName = trim($item['phone_number'])) {
+                                if (!$uName = trim($item['email'])) {
+                                    $uName = '- нет данных -';
+                                }
+                            }
+                        }
+                        ?>
+                        <option value="<?= $item['id'] ?>"><?= Html::encode($uName) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -90,8 +111,11 @@ JS;
                 <input type="text" class="form-control">
             </div>
             <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2">
-                <select class="filter-status-type combobox form-control" placeholder="Статус">
-                    <option></option>
+                <select id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
+                    <option value="1">Создано</option>
+                    <option value="2">Выполняется</option>
+                    <option value="3">Завершено</option>
+                    <option value="4">Удалено</option>
                 </select>
             </div>
         </div>

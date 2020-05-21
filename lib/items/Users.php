@@ -21,16 +21,8 @@ class Users extends ItemCache
 
     public function getItems()
     {
-        $itemsFiltered = [];
-
         $items = parent::getItems();
 
-        foreach ($items as $it) {
-            if (!in_array($it['model'], $itemsFiltered)) {
-                $itemsFiltered[] = $it['model'];
-            }
-        }
-
-        return $itemsFiltered;
+        return $items['users'] ?? [];
     }
 }
