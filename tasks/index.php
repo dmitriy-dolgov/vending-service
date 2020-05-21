@@ -4,16 +4,29 @@ require_once __DIR__ . '/../html/header.php';
 
 use helpers\Html;
 use lib\items\Equipment;
-
-$e = new Equipment();
-$sdf = $e->getItems();
+use lib\items\Users;
 
 $GLOBALS['html-code']['js'][] = <<<JS
 $(document).ready(function(){
     $('.combobox').combobox();
+    
+    /* TODO: не работает почему-то - видимо, combobox переделывает структуру
+    $('.combobox').each(function() {
+      var placeholder = $(this).attr('placeholder');
+      if (placeholder) {
+        console.log("placeholder: " + placeholder);
+        $(this).attr('placeholder', placeholder)
+      }
+    });*/
 
     // bonus: add a placeholder
-    //$('.combobox').attr('placeholder', 'For example, start typing "Pennsylvania"');
+    $('.filter-equipment-type').attr('placeholder', 'Тип оборудования');
+    $('.filter-city-type').attr('placeholder', 'Город');
+    $('.filter-outlet-type').attr('placeholder', 'Торговая точка');
+    $('.filter-creator-type').attr('placeholder', 'Создатель');
+    $('.filter-executor-type').attr('placeholder', 'Исполнитель');
+    $('.filter-status-type').attr('placeholder', 'Статус');
+    
 });
 JS;
 ?>
@@ -35,8 +48,7 @@ JS;
         </div>
         <div class="row fields-row mt-3">
             <div class="col-lg col-md-4 col-sm-6 order-lg-1 mt-sm-0">
-                <!--<input type="text" placeholder="Тип оборудования" class="form-control">-->
-                <select class="combobox form-control">
+                <select class="filter-equipment-type combobox form-control" placeholder="Тип оборудования">
                     <option></option>
                     <?php foreach ((new Equipment())->getItems() as $key => $item): ?>
                         <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
@@ -44,16 +56,30 @@ JS;
                 </select>
             </div>
             <div class="col-lg col-md-4 col-sm-6 order-lg-2 mt-sm-0 mt-2">
-                <input type="text" placeholder="Город" class="combobox form-control">
+                <select class="filter-city-type combobox form-control" placeholder="Город">
+                    <option></option>
+                </select>
             </div>
             <div class="col-lg col-md-4 col-sm-12 order-lg-3 mt-md-0 mt-sm-3 mt-2">
-                <input type="text" placeholder="Торговая точка" class="combobox form-control">
+                <select class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
+                    <option></option>
+                </select>
             </div>
             <div class="col-lg col-sm-4 order-lg-4 mt-lg-0 mt-sm-3 mt-2">
-                <input type="text" placeholder="Создатель" class="combobox form-control">
+                <select id="filter-creator" class="filter-creator-type combobox form-control " placeholder="Создатель">
+                    <option></option>
+                    <?php foreach ((new Users())->getItems() as $key => $item): ?>
+                        <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="col-lg col-sm-4 order-lg-5 mt-lg-0 mt-sm-3 mt-2">
-                <input type="text" placeholder="Исполнитель" class="form-control">
+                <select id="filter-creator" class="filter-executor-type combobox form-control " placeholder="Исполнитель">
+                    <option></option>
+                    <?php foreach ((new Users())->getItems() as $key => $item): ?>
+                        <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="col-lg col-sm-4 order-lg-6 order-7 mt-sm-3 mt-2"><label
                         class="col-label">Поиск по дате</label></div>
@@ -64,7 +90,9 @@ JS;
                 <input type="text" class="form-control">
             </div>
             <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2">
-                <input type="text" class="form-control" placeholder="Статус">
+                <select class="filter-status-type combobox form-control" placeholder="Статус">
+                    <option></option>
+                </select>
             </div>
         </div>
     </form>
