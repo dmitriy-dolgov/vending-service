@@ -9,6 +9,14 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script src="js/bootstrap-combobox.js"></script>
-<?= $GLOBALS['html-code']['js'] ?? '' ?>
+<script>
+<?php
+    if (!empty($GLOBALS['html-code']['js'])) {
+        foreach ($GLOBALS['html-code']['js'] as $jsCode) {
+            echo $jsCode . "\n";
+        }
+    }
+?>
+</script>
 </body>
 </html>

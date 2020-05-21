@@ -8,6 +8,14 @@ use lib\items\Equipment;
 $e = new Equipment();
 $sdf = $e->getItems();
 
+$GLOBALS['html-code']['js'][] = <<<JS
+$(document).ready(function(){
+    $('.combobox').combobox();
+
+    // bonus: add a placeholder
+    //$('.combobox').attr('placeholder', 'For example, start typing "Pennsylvania"');
+});
+JS;
 ?>
 
     <form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid">
@@ -36,13 +44,13 @@ $sdf = $e->getItems();
                 </select>
             </div>
             <div class="col-lg col-md-4 col-sm-6 order-lg-2 mt-sm-0 mt-2">
-                <input type="text" placeholder="Город" class="form-control">
+                <input type="text" placeholder="Город" class="combobox form-control">
             </div>
             <div class="col-lg col-md-4 col-sm-12 order-lg-3 mt-md-0 mt-sm-3 mt-2">
-                <input type="text" placeholder="Торговая точка" class="form-control">
+                <input type="text" placeholder="Торговая точка" class="combobox form-control">
             </div>
             <div class="col-lg col-sm-4 order-lg-4 mt-lg-0 mt-sm-3 mt-2">
-                <input type="text" placeholder="Создатель" class="form-control">
+                <input type="text" placeholder="Создатель" class="combobox form-control">
             </div>
             <div class="col-lg col-sm-4 order-lg-5 mt-lg-0 mt-sm-3 mt-2">
                 <input type="text" placeholder="Исполнитель" class="form-control">
