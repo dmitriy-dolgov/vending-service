@@ -1,3 +1,4 @@
+@import "multi-select.css";
 @media (min-width: 992px) {
   .fields-row .col-lg {
     max-width: 20%;

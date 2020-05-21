@@ -9,6 +9,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script src="js/bootstrap-combobox.js"></script>
+<script src="js/jquery.multi-select.min.js"></script>
 <script>
 <?php
     if (!empty($GLOBALS['html-code']['js'])) {
