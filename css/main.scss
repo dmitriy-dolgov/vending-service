@@ -1,5 +1,20 @@
 @import "multi-select.css";
 
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #76839d;
+  background-color: #f5f7fc;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
 @media (min-width: 992px) {
   .fields-row .col-lg {
     max-width: 20%;
@@ -17,4 +32,48 @@
   display: -webkit-box;
   display: flex;
   height: 40px;
+}
+
+.navbar {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
+  padding: 0.4rem 1rem;
+
+  .navbar-link {
+    text-shadow: 0 -1px 0px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    color: white !important;
+  }
+
+  .navbar-link.logo {
+    font-weight: 500;
+    font-size: 19px;
+  }
+
+  .navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+  }
+
+  .app-icon {
+    position: relative;
+    margin-left: 20px;
+    top: -2px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: center/100% no-repeat;
+    background-image: url("/img/sign-out.png");
+    min-height: 24px;
+    min-width: 24px;
+    vertical-align: middle;
+  }
+}
+
+.bg-primary {
+  background-color: #16bfbf !important;
 }
