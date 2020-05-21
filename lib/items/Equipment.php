@@ -35,7 +35,16 @@ class Equipment extends ItemCache
 
     public function getItems()
     {
+        $itemsFiltered = [];
+
         $items = parent::getItems();
-        return $items;
+
+        foreach ($items as $it) {
+            if (!in_array($it['model'], $itemsFiltered)) {
+                $itemsFiltered[] = $it['model'];
+            }
+        }
+
+        return $itemsFiltered;
     }
 }

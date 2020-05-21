@@ -30,8 +30,8 @@ $sdf = $e->getItems();
                 <!--<input type="text" placeholder="Тип оборудования" class="form-control">-->
                 <select class="combobox form-control">
                     <option></option>
-                    <?php foreach ((new Equipment())->getItems() as $item): ?>
-                        <option value="<?= Html::encode($item['id']) ?>"><?= Html::encode($item['model']) ?></option>
+                    <?php foreach ((new Equipment())->getItems() as $key => $item): ?>
+                        <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
