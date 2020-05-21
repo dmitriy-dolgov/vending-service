@@ -5,7 +5,7 @@ namespace lib\items;
 use lib\Api;
 use lib\ItemCache;
 
-class Equipment extends ItemCache
+class Users extends ItemCache
 {
     protected $api;
 
@@ -16,7 +16,7 @@ class Equipment extends ItemCache
 
     protected function getItemsFromPrimaryRepository()
     {
-        return $this->api->command('get', 'machines', ['token' => $this->api::API_KEY]);
+        return $this->api->command('get', 'users', ['token' => $this->api::API_KEY]);
     }
 
     public function getItems()

@@ -7,12 +7,14 @@ abstract class ItemCache
     const CACHE_DIR = APP_DIR . 'data/';
 
 
-    abstract protected function getUniqueName();
-
     abstract protected function getItemsFromPrimaryRepository();
 
-    abstract protected function ifDataValid($data);
 
+    protected function getUniqueName()
+    {
+        $nameParts = explode('\\', static::class);
+        return strtolower(array_pop($nameParts));
+    }
 
     protected function getCachedFilePath()
     {
@@ -44,5 +46,14 @@ abstract class ItemCache
         }
 
         return $itemsInfoArr;
+    }
+
+    protected function ifDataValid($data)
+    {
+        if (!$data || (isset($data['result']) && $data['result'] == 'auth failed')) {
+            return false;
+        }
+
+        return true;
     }
 }
