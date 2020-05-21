@@ -61,7 +61,8 @@ require APP_DIR . 'vendor/autoload.php';
                 <app-icon class="app-icon"></app-icon>
             </a>
             <button aria-haspopup="true" aria-label="Toggle navigation"
-                    class="btn btn btn-sm navbar-toggler-btn" type="button">
+                    class="btn btn-sm navbar-toggler-btn" type="button">
+                <app-icon class="app-icon"></app-icon>
             </button>
         </div>
     </div>

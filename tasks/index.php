@@ -38,10 +38,11 @@ $(document).ready(function(){
 JS;
 ?>
 
+<div class="py-4">
     <form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid">
         <div class="row">
             <div class="col-xl-2 col-lg-3 col-sm-12 col-6">
-                <h1 class="page-title">Все задачи (<span class="task-amount"></span>)</h1>
+                <h1 class="page-title">Задачи (<span class="task-amount"></span>)</h1>
             </div>
             <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-sm-2">
                 <button class="btn app-btn btn-primary-dark" type="button">Добавить задачу</button>
@@ -50,7 +51,7 @@ JS;
                 <button class="btn app-btn btn-secondary" type="reset">Сбросить фильтры</button>
             </div>
             <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-2">
-                <button class="btn app-btn btn-primary" type="submit">Применить фильтры</button>
+                <button class="btn app-btn btn-primary" type="button">Применить фильтры</button>
             </div>
         </div>
         <div class="row fields-row mt-3">
@@ -131,6 +132,7 @@ JS;
             </div>
         </div>
     </form>
+</div>
 
 <?php
 
