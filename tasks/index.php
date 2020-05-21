@@ -27,8 +27,13 @@ $(document).ready(function(){
     $('.filter-executor-type').attr('placeholder', 'Исполнитель');
     $('.filter-status-type').attr('placeholder', 'Статус');
     
-    
     $('#sel-statuses').multiSelect();
+    
+    $('.filter-calendar-type').datepicker({
+        todayBtn: 'linked',
+        clearBtn: true,
+        language: 'ru'
+    });
 });
 JS;
 ?>
@@ -105,10 +110,16 @@ JS;
             <div class="col-lg col-sm-4 order-lg-6 order-7 mt-sm-3 mt-2"><label
                         class="col-label">Поиск по дате</label></div>
             <div class="col-lg col-sm-4 order-lg-7 order-8 mt-sm-3 mt-0"><span class="datepicker-label">с</span>
-                <input type="text" class="form-control">
+                <div class="filter-calendar-type date input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+                </div>
             </div>
             <div class="col-lg col-sm-4 order-lg-8 order-9 mt-sm-3 mt-2"><span class="datepicker-label">по</span>
-                <input type="text" class="form-control">
+                <div class="filter-calendar-type date input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+                </div>
             </div>
             <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2">
                 <select id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>

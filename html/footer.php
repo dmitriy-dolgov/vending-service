@@ -10,6 +10,9 @@
         crossorigin="anonymous"></script>
 <script src="js/bootstrap-combobox.js"></script>
 <script src="js/jquery.multi-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ru.min.js"></script>
+
 <script>
 <?php
     if (!empty($GLOBALS['html-code']['js'])) {
