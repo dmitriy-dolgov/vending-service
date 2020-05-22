@@ -49,27 +49,15 @@ use lib\items\Tasks;
                         </div>
                         <div class="col-xl col-md-3 col-6 order-xl-7 order-md-3">
                             <div class="app-list-item-actions">
-                                <button class="mx-2 mat-icon-button" mat-icon-button=""><span
+                                <button class="mx-2 mat-icon-button"><span
                                             class="mat-button-wrapper"><app-icon class="app-icon"
-                                                                                 name="ic_edit" _nghost-hvh-c1=""
-                                                                                 ng-reflect-size="32"
-                                                                                 ng-reflect-name="ic_edit"
-                                                                                 style="background-image: url(&quot;ic_edit.png&quot;); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
-                                    <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""
-                                         ng-reflect-centered="true" ng-reflect-disabled="false"
-                                         ng-reflect-trigger="[object HTMLButtonElement]"></div>
-                                    <div class="mat-button-focus-overlay"></div>
+                                                                                 name="ic_edit"
+                                                                                 style="display: block; background-image: url(/img/ic_edit.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
                                 </button>
-                                <button class="mx-2 mat-icon-button" mat-icon-button=""><span
+                                <button class="mx-2 mat-icon-button"><span
                                             class="mat-button-wrapper"><app-icon class="app-icon"
-                                                                                 name="ic_delete" _nghost-hvh-c1=""
-                                                                                 ng-reflect-size="32"
-                                                                                 ng-reflect-name="ic_delete"
-                                                                                 style="background-image: url(&quot;ic_delete.png&quot;); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
-                                    <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""
-                                         ng-reflect-centered="true" ng-reflect-disabled="false"
-                                         ng-reflect-trigger="[object HTMLButtonElement]"></div>
-                                    <div class="mat-button-focus-overlay"></div>
+                                                                                 name="ic_delete"
+                                                                                 style="display: block; background-image: url(/img/ic_delete.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
                                 </button>
                             </div>
                         </div>
