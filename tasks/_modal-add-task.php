@@ -25,16 +25,6 @@ use helpers\Html;
                                 </select>
                             </div>
                             <div class="col-sm-6 col-lg-3">
-                                <!--<div class="form-group">
-                                    <div class="app-autocomplete"><input autocomplete="off"
-                                                                         class="form-control ng-untouched ng-pristine ng-valid"
-                                                                         formcontrolname="city" placeholder="Город"
-                                                                         spellcheck="false" type="text"
-                                                                         role="combobox"
-                                                                         aria-autocomplete="list" aria-expanded="false"
-                                                                         aria-haspopup="true">
-                                    </div>
-                                </div>-->
                                 <select class="filter-city-type combobox form-control" placeholder="Город">
                                     <option></option>
                                     <?php foreach ($htmlCities->getItems() as $item): ?>
@@ -96,21 +86,11 @@ use helpers\Html;
                                 </select>
                             </div>
                             <div class="col-sm-12 col-lg-6">
-                                <!--<div class="form-group">
-                                    <div class="app-autocomplete"><input
-                                                class="form-control ng-untouched ng-pristine ng-invalid"
-                                                formcontrolname="machine" placeholder="Добавить оборудование"
-                                                spellcheck="false"
-                                                type="text"
-                                                autocomplete="off" role="combobox" aria-autocomplete="list"
-                                                aria-expanded="false" aria-haspopup="true">
-                                    </div>
-                                </div>-->
                                 <select class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
                                     <option></option>
-                                    <?php /*foreach ($htmlDivisions->getItems() as $item): ?>
-                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['address'] . ' (' . $item->getMachine($item['id'])['serial_number'] . ')') ?></option>
-                                    <?php endforeach;*/ ?>
+                                    <?php foreach ($htmlDivisions->getItems() as $item): ?>
+                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['address'] . ' (' . $htmlMachine->getItemsKeyMapped()[$item['id']]['serial_number'] . ')') ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>

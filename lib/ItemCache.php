@@ -6,9 +6,9 @@ abstract class ItemCache
 {
     const CACHE_DIR = APP_DIR . 'data/';
 
-    protected static $cachedItems = null;
+    protected $cachedItems = null;
 
-    protected static $cachedItemsKeyMapped = null;
+    protected $cachedItemsKeyMapped = null;
 
 
     abstract protected function getItemsFromPrimaryRepository();
@@ -27,8 +27,8 @@ abstract class ItemCache
 
     public function getItems()
     {
-        if (self::$cachedItems !== null) {
-            return self::$cachedItems;
+        if ($this->cachedItems !== null) {
+            return $this->cachedItems;
         }
 
         $itemsInfoArr = null;
@@ -53,15 +53,15 @@ abstract class ItemCache
             file_put_contents($cfp, json_encode($itemsInfoArr));
         }
 
-        self::$cachedItems = $itemsInfoArr;
+        $this->cachedItems = $itemsInfoArr;
 
         return $itemsInfoArr;
     }
 
     public function getItemsKeyMapped($keyName = 'id')
     {
-        if (self::$cachedItemsKeyMapped !== null) {
-            return self::$cachedItemsKeyMapped;
+        if ($this->cachedItemsKeyMapped !== null) {
+            return $this->cachedItemsKeyMapped;
         }
 
         $items = $this->getItems();
@@ -71,10 +71,10 @@ abstract class ItemCache
                 throw new \Exception('Не обнаружен требуемый ключ `' . $keyName . '`');
             }
 
-            self::$cachedItemsKeyMapped[$it[$keyName]] = $it;
+            $this->cachedItemsKeyMapped[$it[$keyName]] = $it;
         }
 
-        return self::$cachedItemsKeyMapped;
+        return $this->cachedItemsKeyMapped;
     }
 
     protected function ifDataValid($data)
