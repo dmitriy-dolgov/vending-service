@@ -519,5 +519,34 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 }
 
 /* // task list */
+.color-gray {
+  color: #76839D;
+}
+
+h4 {
+  font-weight: 400;
+}
+
+/* dialog (new task) */
+.modal-dialog {
+  color: rgba(0, 0, 0, 0.87);
+}
+.modal-dialog .dialog-header {
+  position: relative;
+  margin-bottom: 20px;
+}
+.modal-dialog .dialog-header .close {
+  width: 25px;
+  height: 25px;
+  background: center/100% no-repeat url(/img/ic_close.png);
+  position: absolute;
+  right: 0;
+  top: 0px;
+}
+.modal-dialog .dialog-header h4 {
+  font-size: 1.35rem;
+}
+
+/* // dialog (new task) */
 
 /*# sourceMappingURL=main.css.map */

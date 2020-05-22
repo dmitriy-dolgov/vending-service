@@ -9,6 +9,9 @@ class Tasks extends ItemCache
 {
     protected $api;
 
+    protected $items;
+
+
     public function __construct()
     {
         $this->api = new Api();
@@ -21,8 +24,19 @@ class Tasks extends ItemCache
 
     public function getItems()
     {
-        $items = parent::getItems();
+        if (!$this->items) {
+            $this->items = parent::getItems();
+        }
 
-        return $items;
+        return $this->items;
+    }
+
+    public function getItemCount()
+    {
+        if (!$this->items) {
+            $this->items = $this->getItems();
+        }
+
+        return count($this->items);
     }
 }

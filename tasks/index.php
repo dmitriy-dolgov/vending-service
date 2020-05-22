@@ -4,6 +4,8 @@ require_once __DIR__ . '/../html/header.php';
 
 use lib\items\Tasks;
 
+$tasks = new Tasks();
+
 ?>
 
     <div class="py-4">
@@ -11,7 +13,7 @@ use lib\items\Tasks;
         <?php require '_filter.php'; ?>
 
         <ul class="list-group app-list-group mt-4 mb-5 ng-star-inserted">
-            <?php foreach ((new Tasks())->getItems() as $item): ?>
+            <?php foreach ($tasks->getItems() as $item): ?>
                 <li class="list-group-item ng-star-inserted">
                     <div class="row">
                         <div class="col-xl-4 col-md-6 col-12 order-first">
@@ -69,5 +71,7 @@ use lib\items\Tasks;
     </div>
 
 <?php
+
+include '_modal-add-task.php';
 
 require_once __DIR__ . '/../html/footer.php';

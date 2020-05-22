@@ -42,10 +42,12 @@ JS;
 <form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid">
     <div class="row">
         <div class="col-xl-2 col-lg-3 col-sm-12 col-6">
-            <h1 class="page-title">Задачи (<span class="task-amount"></span>)</h1>
+            <h1 class="page-title">Задачи (<span class="task-amount"><?= $tasks->getItemCount() ?></span>)</h1>
         </div>
         <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-sm-2">
-            <button class="btn app-btn btn-primary-dark" type="button">Добавить задачу</button>
+            <button class="btn app-btn btn-primary-dark btn-add-task" type="button" data-toggle="modal"
+                    data-target="#modal-add-task">Добавить задачу
+            </button>
         </div>
         <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-2 offset-0 offset-xl-4">
             <button class="btn app-btn btn-secondary" type="reset">Сбросить фильтры</button>
@@ -113,19 +115,19 @@ JS;
             </select>
         </div>
         <div class="col-lg col-sm-4 order-lg-6 order-7 mt-sm-3 mt-2"><label
-                class="col-label">Поиск по дате</label></div>
+                    class="col-label">Поиск по дате</label></div>
         <div class="col-lg col-sm-4 order-lg-7 order-8 mt-sm-3 mt-0"><span class="datepicker-label">с</span>
             <div class="filter-calendar-type date input-group">
                 <input type="text" class="form-control">
                 <div class="input-group-append"><span class="input-group-text"><i
-                            class="fa fa-calendar"></i></span></div>
+                                class="fa fa-calendar"></i></span></div>
             </div>
         </div>
         <div class="col-lg col-sm-4 order-lg-8 order-9 mt-sm-3 mt-2"><span class="datepicker-label">по</span>
             <div class="filter-calendar-type date input-group">
                 <input type="text" class="form-control">
                 <div class="input-group-append"><span class="input-group-text"><i
-                            class="fa fa-calendar"></i></span></div>
+                                class="fa fa-calendar"></i></span></div>
             </div>
         </div>
         <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2">
