@@ -27,7 +27,7 @@ class Equipment extends ItemCache
 
         foreach ($items as $it) {
             if (!in_array($it['model'], $itemsFiltered)) {
-                $itemsFiltered[] = $it['model'];
+                $itemsFiltered[$it['id']] = $it['model'];
             }
         }
 
