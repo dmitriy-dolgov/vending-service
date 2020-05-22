@@ -2,145 +2,83 @@
 
 require_once __DIR__ . '/../html/header.php';
 
-use helpers\Html;
-use lib\items\Equipment;
-use lib\items\Users;
-use lib\items\Divisions;
+use lib\items\Tasks;
 
-$GLOBALS['html-code']['js'][] = <<<JS
-$(document).ready(function(){
-    $('.combobox').combobox();
-    
-    /* TODO: не работает почему-то - видимо, combobox переделывает структуру
-    $('.combobox').each(function() {
-      var placeholder = $(this).attr('placeholder');
-      if (placeholder) {
-        console.log("placeholder: " + placeholder);
-        $(this).attr('placeholder', placeholder)
-      }
-    });*/
-
-    // bonus: add a placeholder
-    $('.filter-equipment-type').attr('placeholder', 'Тип оборудования');
-    $('.filter-city-type').attr('placeholder', 'Город');
-    $('.filter-outlet-type').attr('placeholder', 'Торговая точка');
-    $('.filter-creator-type').attr('placeholder', 'Создатель');
-    $('.filter-executor-type').attr('placeholder', 'Исполнитель');
-    $('.filter-status-type').attr('placeholder', 'Статус');
-    
-    $('#sel-statuses').multiSelect({
-        'noneText': 'Статус',
-        //'containerHTML': '<div class="multi-select-container form-control">',
-        'buttonHTML': '<span class="multi-select-button form-control">',
-    });
-    
-    $('.filter-calendar-type').datepicker({
-        todayBtn: 'linked',
-        clearBtn: true,
-        language: 'ru'
-    });
-});
-JS;
 ?>
 
-<div class="py-4">
-    <form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid">
-        <div class="row">
-            <div class="col-xl-2 col-lg-3 col-sm-12 col-6">
-                <h1 class="page-title">Задачи (<span class="task-amount"></span>)</h1>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-sm-2">
-                <button class="btn app-btn btn-primary-dark" type="button">Добавить задачу</button>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-2 offset-0 offset-xl-4">
-                <button class="btn app-btn btn-secondary" type="reset">Сбросить фильтры</button>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-2">
-                <button class="btn app-btn btn-primary" type="button">Применить фильтры</button>
-            </div>
-        </div>
-        <div class="row fields-row mt-3">
-            <div class="col-lg col-md-4 col-sm-6 order-lg-1 mt-sm-0">
-                <select class="filter-equipment-type combobox form-control" placeholder="Тип оборудования">
-                    <option></option>
-                    <?php foreach ((new Equipment())->getItems() as $key => $item): ?>
-                        <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-lg col-md-4 col-sm-6 order-lg-2 mt-sm-0 mt-2">
-                <select class="filter-city-type combobox form-control" placeholder="Город">
-                    <option></option>
-                </select>
-            </div>
-            <div class="col-lg col-md-4 col-sm-12 order-lg-3 mt-md-0 mt-sm-3 mt-2">
-                <select class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
-                    <option></option>
-                    <?php foreach ((new Divisions())->getItems() as $item): ?>
-                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['description'] . ' (' . $item['address'] . ')') ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-lg col-sm-4 order-lg-4 mt-lg-0 mt-sm-3 mt-2">
-                <select id="filter-creator" class="filter-creator-type combobox form-control " placeholder="Создатель">
-                    <option></option>
-                    <?php
-                    foreach ((new Users())->getItems() as $item):
-                        if (!$uName = trim($item['name'])) {
-                            if (!$uName = trim($item['phone_number'])) {
-                                if (!$uName = trim($item['email'])) {
-                                    $uName = '- нет данных -';
-                                }
-                            }
-                        }
-                        ?>
-                        <option value="<?= $item['id'] ?>"><?= Html::encode($uName) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-lg col-sm-4 order-lg-5 mt-lg-0 mt-sm-3 mt-2">
-                <select id="filter-creator" class="filter-executor-type combobox form-control "
-                        placeholder="Исполнитель">
-                    <option></option>
-                    <?php
-                    foreach ((new Users())->getItems() as $item):
-                        if (!$uName = trim($item['name'])) {
-                            if (!$uName = trim($item['phone_number'])) {
-                                if (!$uName = trim($item['email'])) {
-                                    $uName = '- нет данных -';
-                                }
-                            }
-                        }
-                        ?>
-                        <option value="<?= $item['id'] ?>"><?= Html::encode($uName) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-lg col-sm-4 order-lg-6 order-7 mt-sm-3 mt-2"><label
-                        class="col-label">Поиск по дате</label></div>
-            <div class="col-lg col-sm-4 order-lg-7 order-8 mt-sm-3 mt-0"><span class="datepicker-label">с</span>
-                <div class="filter-calendar-type date input-group">
-                    <input type="text" class="form-control">
-                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
-                </div>
-            </div>
-            <div class="col-lg col-sm-4 order-lg-8 order-9 mt-sm-3 mt-2"><span class="datepicker-label">по</span>
-                <div class="filter-calendar-type date input-group">
-                    <input type="text" class="form-control">
-                    <div class="input-group-append"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
-                </div>
-            </div>
-            <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2">
-                <select id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
-                    <option value="1">Создано</option>
-                    <option value="2">Выполняется</option>
-                    <option value="3">Завершено</option>
-                    <option value="4">Удалено</option>
-                </select>
-            </div>
-        </div>
-    </form>
-</div>
+    <div class="py-4">
+
+        <?php require '_filter.php'; ?>
+
+        <ul class="list-group app-list-group mt-4 mb-5 ng-star-inserted">
+            <?php foreach ((new Tasks())->getItems() as $item): ?>
+                <li class="list-group-item ng-star-inserted">
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6 col-12 order-first">
+                            <div class="machine-state ic_pause ng-star-inserted"
+                                 ng-reflect-ng-class="machine-state,ic_pause" title="Простой"></div>
+                            <div class="ng-star-inserted">
+                                <div class="text-warning text-bold fsz-14">ИП Кудрин А.В.</div>
+                                <div class="text-dark fsz-14">(ул. Ленина, 26, г. Оренбург)</div>
+                                <div class="fsz-12">NESCAFÉ ALEGRIA 1060</div>
+                            </div>
+                        </div>
+                        <div class="col-xl col-md-3 col-6 order-xl-2 order-md-4">
+                            <div class="item-heading fsz-9 text-nowrap">Дата</div>
+                            <div class="text-dark fsz-12"> 20.05.2020<br>
+                                19:58:57
+                            </div>
+                        </div>
+                        <div class="col-xl col-md-3 col-6 order-xl-3 order-md-5">
+                            <div class="item-heading fsz-9 text-nowrap">Создатель</div>
+                            <div class="fsz-12">
+                                <span class="text-dark ng-star-inserted">Рустам Орск</span></div>
+                        </div>
+                        <div class="col-xl col-md-3 col-6 order-xl-4 order-md-6">
+                            <div class="item-heading fsz-9 text-nowrap">Исполнитель</div>
+                            <div class="fsz-12">
+                                <span class="text-dark ng-star-inserted">Рустам Орск</span></div>
+                        </div>
+                        <div class="col-xl col-md-3 col-6 order-xl-5 order-md-2">
+                            <div class="item-heading fsz-9 text-nowrap">Статус</div>
+                            <div class="text-dark fsz-12">Удалено</div>
+                        </div>
+                        <div class="col-xl col-md-3 col-6 order-xl-6 order-md-7">
+                            <div class="item-heading fsz-9 text-nowrap">&nbsp;</div>
+                            <div class="text-dark fsz-12">ТО-0, ТО-2</div>
+                        </div>
+                        <div class="col-xl col-md-3 col-6 order-xl-7 order-md-3">
+                            <div class="app-list-item-actions">
+                                <button class="mx-2 mat-icon-button" mat-icon-button=""><span
+                                            class="mat-button-wrapper"><app-icon class="app-icon"
+                                                                                 name="ic_edit" _nghost-hvh-c1=""
+                                                                                 ng-reflect-size="32"
+                                                                                 ng-reflect-name="ic_edit"
+                                                                                 style="background-image: url(&quot;ic_edit.png&quot;); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
+                                    <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""
+                                         ng-reflect-centered="true" ng-reflect-disabled="false"
+                                         ng-reflect-trigger="[object HTMLButtonElement]"></div>
+                                    <div class="mat-button-focus-overlay"></div>
+                                </button>
+                                <button class="mx-2 mat-icon-button" mat-icon-button=""><span
+                                            class="mat-button-wrapper"><app-icon class="app-icon"
+                                                                                 name="ic_delete" _nghost-hvh-c1=""
+                                                                                 ng-reflect-size="32"
+                                                                                 ng-reflect-name="ic_delete"
+                                                                                 style="background-image: url(&quot;ic_delete.png&quot;); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
+                                    <div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""
+                                         ng-reflect-centered="true" ng-reflect-disabled="false"
+                                         ng-reflect-trigger="[object HTMLButtonElement]"></div>
+                                    <div class="mat-button-focus-overlay"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+    </div>
 
 <?php
 
