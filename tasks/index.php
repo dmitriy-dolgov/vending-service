@@ -5,6 +5,7 @@ require_once __DIR__ . '/../html/header.php';
 use helpers\Html;
 use lib\items\Equipment;
 use lib\items\Users;
+use lib\items\Divisions;
 
 $GLOBALS['html-code']['js'][] = <<<JS
 $(document).ready(function(){
@@ -75,6 +76,9 @@ JS;
             <div class="col-lg col-md-4 col-sm-12 order-lg-3 mt-md-0 mt-sm-3 mt-2">
                 <select class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
                     <option></option>
+                    <?php foreach ((new Divisions())->getItems() as $item): ?>
+                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['description'] . ' (' . $item['address'] . ')') ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="col-lg col-sm-4 order-lg-4 mt-lg-0 mt-sm-3 mt-2">
