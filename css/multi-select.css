@@ -6,7 +6,7 @@
 .multi-select-menu {
     position: absolute;
     left: 0;
-    top: 0.8em;
+    top: 29px;
     z-index: 1;
     float: left;
     min-width: 100%;
@@ -61,19 +61,20 @@
 
 .multi-select-button {
     display: inline-block;
-    font-size: 0.875em;
-    padding: 0.2em 0.6em;
+    /*font-size: 0.875em;
+    padding: 0.2em 0;*/
     /*max-width: 16em;*/
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: -0.5em;
-    background-color: #fff;
+    color: #76839d;
+    /*background-color: #fff;
     border: 1px solid #aaa;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    cursor: default;
+    cursor: default;*/
 }
 
 .multi-select-button:after {
@@ -87,9 +88,9 @@
     margin-left: 0.4em;
     vertical-align: 0.1em;
 
-    right: 7px;
+    right: 12px;
     position: absolute;
-    top: 11px;
+    top: 17px;
 }
 
 .multi-select-container--open .multi-select-menu {

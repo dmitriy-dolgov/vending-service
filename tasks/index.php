@@ -27,7 +27,11 @@ $(document).ready(function(){
     $('.filter-executor-type').attr('placeholder', 'Исполнитель');
     $('.filter-status-type').attr('placeholder', 'Статус');
     
-    $('#sel-statuses').multiSelect();
+    $('#sel-statuses').multiSelect({
+        'noneText': 'Статус',
+        //'containerHTML': '<div class="multi-select-container form-control">',
+        'buttonHTML': '<span class="multi-select-button form-control">',
+    });
     
     $('.filter-calendar-type').datepicker({
         todayBtn: 'linked',
