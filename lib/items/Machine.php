@@ -5,7 +5,7 @@ namespace lib\items;
 use lib\Api;
 use lib\ItemCache;
 
-class Equipment extends ItemCache
+class Machine extends ItemCache
 {
     protected $api;
 
@@ -19,7 +19,7 @@ class Equipment extends ItemCache
         return $this->api->command('get', 'machines', ['token' => $this->api::API_KEY]);
     }
 
-    public function getItems()
+    public function getUnifiedItems()
     {
         $itemsFiltered = [];
 

@@ -1,3 +1,8 @@
+<?php
+
+use helpers\Html;
+
+?>
 <div id="modal-add-task" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -11,19 +16,16 @@
                     <div class="mat-dialog-content">
                         <div class="row">
                             <div class="col-sm-6 col-lg-3">
-                                <div class="form-group">
-                                    <div class="app-autocomplete"><input
-                                                class="form-control ng-untouched ng-pristine ng-valid"
-                                                formcontrolname="machineType"
-                                                placeholder="Тип оборудования" spellcheck="false"
-                                                type="text" autocomplete="off"
-                                                role="combobox" aria-autocomplete="list"
-                                                aria-expanded="false" aria-haspopup="true">
-                                    </div>
-                                </div>
+                                <select class="filter-machine-type combobox form-control"
+                                        placeholder="Тип оборудования">
+                                    <option></option>
+                                    <?php foreach ($htmlMachine->getItems() as $key => $item): ?>
+                                        <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="col-sm-6 col-lg-3">
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <div class="app-autocomplete"><input autocomplete="off"
                                                                          class="form-control ng-untouched ng-pristine ng-valid"
                                                                          formcontrolname="city" placeholder="Город"
@@ -32,19 +34,31 @@
                                                                          aria-autocomplete="list" aria-expanded="false"
                                                                          aria-haspopup="true">
                                     </div>
-                                </div>
+                                </div>-->
+                                <select class="filter-city-type combobox form-control" placeholder="Город">
+                                    <option></option>
+                                    <?php foreach ($htmlCities->getItems() as $item): ?>
+                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['name']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="col-sm-6 col-lg-3">
-                                <div class="form-group">
-                                    <div class="app-autocomplete"><input
-                                                class="form-control ng-untouched ng-pristine ng-invalid"
-                                                formcontrolname="worker" placeholder="Назначить исполнителя"
-                                                spellcheck="false"
-                                                type="text"
-                                                autocomplete="off" role="combobox" aria-autocomplete="list"
-                                                aria-expanded="false" aria-haspopup="true">
-                                    </div>
-                                </div>
+                                <select id="filter-creator" class="filter-assign-executor-type combobox form-control"
+                                        placeholder="Назначить исполнителя">
+                                    <option></option>
+                                    <?php
+                                    foreach ($htmlUsers->getItems() as $item):
+                                        if (!$uName = trim($item['name'])) {
+                                            if (!$uName = trim($item['phone_number'])) {
+                                                if (!$uName = trim($item['email'])) {
+                                                    $uName = '- нет данных -';
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                        <option value="<?= $item['id'] ?>"><?= Html::encode($uName) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="col-sm-6 col-lg-3">
                                 <div class="form-group">
@@ -74,17 +88,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6">
-                                <div class="form-group">
-                                    <div class="app-autocomplete">
-                                        <input class="form-control ng-untouched ng-pristine"
-                                               placeholder="Торговая точка" spellcheck="false" type="text"
-                                               autocomplete="off" role="combobox" aria-autocomplete="list"
-                                               aria-expanded="false" aria-haspopup="true">
-                                    </div>
-                                </div>
+                                <select class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
+                                    <option></option>
+                                    <?php foreach ($htmlDivisions->getItems() as $item): ?>
+                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['description'] . ' (' . $item['address'] . ')') ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="col-sm-12 col-lg-6">
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <div class="app-autocomplete"><input
                                                 class="form-control ng-untouched ng-pristine ng-invalid"
                                                 formcontrolname="machine" placeholder="Добавить оборудование"
@@ -93,13 +105,20 @@
                                                 autocomplete="off" role="combobox" aria-autocomplete="list"
                                                 aria-expanded="false" aria-haspopup="true">
                                     </div>
-                                </div>
+                                </div>-->
+                                <select class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
+                                    <option></option>
+                                    <?php /*foreach ($htmlDivisions->getItems() as $item): ?>
+                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['address'] . ' (' . $item->getMachine($item['id'])['serial_number'] . ')') ?></option>
+                                    <?php endforeach;*/ ?>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="mat-dialog-actions">
                         <button class="btn app-btn btn-secondary" type="button">Сбросить</button>
-                        <button class="btn app-btn btn-primary" type="submit" disabled="disabled"> Создать задачу</button>
+                        <button class="btn app-btn btn-primary disabled" type="submit" disabled="disabled">Создать задачу
+                        </button>
                     </div>
                 </form>
 

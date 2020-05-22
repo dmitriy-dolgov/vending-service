@@ -3,8 +3,20 @@
 require_once __DIR__ . '/../html/header.php';
 
 use lib\items\Tasks;
+use lib\items\Machine;
+use lib\items\Cities;
+use lib\items\Users;
+use lib\items\Divisions;
+use lib\items\Status;
 
-$tasks = new Tasks();
+
+$htmlTasks = new Tasks();
+
+$htmlMachine = new Machine();
+$htmlCities = new Cities();
+$htmlUsers = new Users();
+$htmlDivisions = new Divisions();
+$htmlStatus = new Status();
 
 ?>
 
@@ -13,12 +25,12 @@ $tasks = new Tasks();
         <?php require '_filter.php'; ?>
 
         <ul class="list-group app-list-group mt-4 mb-5 ng-star-inserted">
-            <?php foreach ($tasks->getItems() as $item): ?>
+            <?php foreach ($htmlTasks->getItems() as $item): ?>
                 <li class="list-group-item ng-star-inserted">
                     <div class="row">
                         <div class="col-xl-4 col-md-6 col-12 order-first">
                             <div class="machine-state ic_pause ng-star-inserted"
-                                 ng-reflect-ng-class="machine-state,ic_pause" title="Простой"></div>
+                                 title="Простой"></div>
                             <div class="ng-star-inserted">
                                 <div class="text-warning text-bold fsz-14">ИП Кудрин А.В.</div>
                                 <div class="text-dark fsz-14">(ул. Ленина, 26, г. Оренбург)</div>

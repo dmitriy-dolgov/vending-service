@@ -547,6 +547,9 @@ h4 {
 .modal-dialog .dialog-header h4 {
   font-size: 1.35rem;
 }
+.modal-dialog li {
+  font-size: 12px;
+}
 
 .app-autocomplete {
   position: relative;
@@ -622,6 +625,7 @@ h4 {
   color: #fff;
   background-color: #16BFBF;
   border-color: #16BFBF;
+  cursor: pointer;
 }
 
 .btn-secondary:hover {
