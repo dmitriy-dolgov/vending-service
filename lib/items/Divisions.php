@@ -25,11 +25,4 @@ class Divisions extends ItemCache
 
         return $items;
     }
-
-    /*public function getMachine($divisionId)
-    {
-        $machines = (new Machine())->getItemsKeyMapped();
-
-        return $machines[$divisionId] ?? false;
-    }*/
 }

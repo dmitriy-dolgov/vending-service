@@ -626,7 +626,7 @@ h4 {
   color: #fff;
   background-color: #16BFBF;
   border-color: #16BFBF;
-  cursor: pointer;
+  cursor: default;
 }
 
 .btn-secondary:hover {

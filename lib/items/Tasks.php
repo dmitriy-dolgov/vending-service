@@ -19,4 +19,18 @@ class Tasks extends ItemCache
     {
         return $this->api->command('get', 'tasks', ['token' => $this->api::API_KEY]);
     }
+
+    public function getItems()
+    {
+        $items = parent::getItems();
+
+        return $items['tasks'] ?? [];
+    }
+
+    //public function newItem($machineId, $workerUserId, $timeCreated, $comment = '')
+    public function newItem($divisionId, $workerUserId, $timeCreated, $comment = '')
+    {
+        // Вывести из $divisionId
+        $machineId = $divisionId;
+    }
 }
