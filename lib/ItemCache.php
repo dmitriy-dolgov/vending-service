@@ -25,6 +25,12 @@ abstract class ItemCache
         return self::CACHE_DIR . $this->getUniqueName() . '.json';
     }
 
+    public function clearCache()
+    {
+        $cfp = $this->getCachedFilePath();
+        @unlink($cfp);
+    }
+
     public function getItems()
     {
         if ($this->cachedItems !== null) {
