@@ -2,6 +2,16 @@
 
 use helpers\Html;
 
+$GLOBALS['html-code']['js'][] = <<<JS
+$(document).ready(function(){
+    $('.filter-assign-executor-type').attr('placeholder', 'Назначить исполнителя');
+
+    $('.filter-calendar-type-today').datepicker({
+        todayBtn: 'linked',
+        language: 'ru'
+    }).datepicker('setDate', 'now');
+});
+JS;
 ?>
 <div id="modal-add-task" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -51,30 +61,10 @@ use helpers\Html;
                                 </select>
                             </div>
                             <div class="col-sm-6 col-lg-3">
-                                <div class="form-group">
-                                    <div class="mat-form-field-datepicker mat-form-field ng-tns-c16-9 mat-primary mat-form-field-type-mat-input mat-form-field-appearance-legacy mat-form-field-can-float mat-form-field-should-float mat-form-field-hide-placeholder ng-untouched ng-pristine ng-valid">
-                                        <div class="mat-form-field-wrapper">
-                                            <div class="mat-form-field-flex">
-                                                <div class="mat-form-field-infix"><input
-                                                            class="form-control datepicker-form-control mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored ng-untouched ng-pristine ng-valid"
-                                                            aria-haspopup="true" id="mat-input-5"
-                                                            aria-invalid="false" aria-required="false">
-                                                    <i class="form-control-arrow"></i><input formcontrolname="datetime"
-                                                                                             type="hidden" value=""
-                                                                                             class="ng-untouched ng-pristine ng-valid"><span
-                                                            class="mat-form-field-label-wrapper"></span></div>
-                                            </div>
-                                            <div class="mat-form-field-underline ng-tns-c16-9 ng-star-inserted"
-                                                 style=""><span
-                                                        class="mat-form-field-ripple"></span></div>
-                                            <div class="mat-form-field-subscript-wrapper">
-                                                <div class="mat-form-field-hint-wrapper ng-tns-c16-9 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
-                                                     style="opacity: 1; transform: translateY(0%);">
-                                                    <div class="mat-form-field-hint-spacer"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="filter-calendar-type-today date input-group">
+                                    <input type="text" class="form-control">
+                                    <div class="input-group-append"><span class="input-group-text"><i
+                                                    class="fa fa-calendar"></i></span></div>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-lg-6">

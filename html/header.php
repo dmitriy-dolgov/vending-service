@@ -59,11 +59,11 @@ require APP_DIR . 'vendor/autoload.php';
         <div class="d-flex align-items-center">
             <a class="sign-in-btn navbar-link ng-star-inserted">
                 <span class="d-sm-inline">Выйти</span>
-                <app-icon class="app-icon"></app-icon>
+                <div class="app-icon"></div>
             </a>
             <button aria-haspopup="true" aria-label="Toggle navigation"
                     class="btn btn-sm navbar-toggler-btn" type="button">
-                <app-icon class="app-icon"></app-icon>
+                <div class="app-icon"></div>
             </button>
         </div>
     </div>

@@ -64,14 +64,13 @@ $htmlStatus = new Status();
                         <div class="col-xl col-md-3 col-6 order-xl-7 order-md-3">
                             <div class="app-list-item-actions">
                                 <button class="mx-2 mat-icon-button"><span
-                                            class="mat-button-wrapper"><app-icon class="app-icon"
+                                            class="mat-button-wrapper"><div class="app-icon"
                                                                                  name="ic_edit"
-                                                                                 style="display: block; background-image: url(/img/ic_edit.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
+                                                                                 style="display: block; background-image: url(/img/ic_edit.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></div></span>
                                 </button>
                                 <button class="mx-2 mat-icon-button"><span
-                                            class="mat-button-wrapper"><app-icon class="app-icon"
-                                                                                 name="ic_delete"
-                                                                                 style="display: block; background-image: url(/img/ic_delete.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></app-icon></span>
+                                            class="mat-button-wrapper"><div class="app-icon"
+                                                                                 style="display: block; background-image: url(/img/ic_delete.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></div></span>
                                 </button>
                             </div>
                         </div>

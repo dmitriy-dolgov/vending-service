@@ -23,7 +23,7 @@ $(document).ready(function(){
     $('.filter-executor-type').attr('placeholder', 'Исполнитель');
     $('.filter-status-type').attr('placeholder', 'Статус');
     
-    $('.filter-assign-executor-type').attr('placeholder', 'Назначить исполнителя');
+    //$('.filter-assign-executor-type').attr('placeholder', 'Назначить исполнителя');
     
     
     $('#sel-statuses').multiSelect({

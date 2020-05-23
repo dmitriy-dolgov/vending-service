@@ -585,7 +585,8 @@ h4 {
   padding-right: 30px !important;
 }
 
-.mat-dialog-content .form-group {
+.mat-dialog-content .form-group,
+.mat-dialog-content .input-group {
   margin-bottom: 35px;
 }
 
@@ -595,7 +596,7 @@ h4 {
   flex-wrap: wrap;
   min-height: 52px;
   align-items: center;
-  margin-bottom: -24px;
+  /*margin-bottom: -24px;*/
   -webkit-box-pack: center !important;
   justify-content: center !important;
   margin-top: -5px;
