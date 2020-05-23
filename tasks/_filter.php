@@ -36,6 +36,13 @@ $(document).ready(function(){
         clearBtn: true,
         language: 'ru'
     });
+    
+    $('.btn-filter-task-reset').click(function(e) {
+        e.preventDefault();
+        $('.task-filters .combobox-selected').removeClass('combobox-selected');
+        $('.task-filters .combobox').val('');
+        return false;
+    });
 });
 JS;
 ?>
@@ -50,7 +57,7 @@ JS;
             </button>
         </div>
         <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-2 offset-0 offset-xl-4">
-            <button class="btn app-btn btn-secondary" type="reset">Сбросить фильтры</button>
+            <button class="btn app-btn btn-secondary btn-filter-task-reset" type="reset">Сбросить фильтры</button>
         </div>
         <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-2">
             <button class="btn app-btn btn-primary" type="button">Применить фильтры</button>
