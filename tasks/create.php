@@ -46,8 +46,8 @@ if ($action !== 'create-task') {
 }
  */
 
-print_r($_POST);exit;
+//print_r($_POST);exit;
 
 $tasks = new \lib\items\Tasks();
 
-$tasks->newItem();
+$tasks->newItem($_POST['division_id_equipment'], $_POST['worder_id'], $_POST['time_created']);

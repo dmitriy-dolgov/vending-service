@@ -27,10 +27,27 @@ class Tasks extends ItemCache
         return $items['tasks'] ?? [];
     }
 
-    //public function newItem($machineId, $workerUserId, $timeCreated, $comment = '')
-    public function newItem($divisionId, $workerUserId, $timeCreated, $comment = '')
+    public function newItem($divisionId, $workerUserId, $timeCreated, $comment = null)
     {
-        // Вывести из $divisionId
+        // Похоже что так
         $machineId = $divisionId;
+
+        //TODO: добавить часы/минуты/секунды
+        $time = strtotime($timeCreated);
+
+        $data = [
+            'machine_id' => $machineId,
+            'worker_user_id' => $workerUserId,
+            //TODO: реализовать
+            //'time_created' => date('', $time),     //2020-05-23T10:29:23.787Z
+        ];
+
+        if ($comment) {
+            $data['comment'] = $comment;
+        }
+
+        $apiResult = $this->api->command('post', 'tasks', ['token' => $this->api::API_KEY], $data);
+
+        return $apiResult;
     }
 }
