@@ -246,6 +246,9 @@ body {
 .app-list-group {
   font-size: 14px;
 }
+.app-list-group .list-group-item + .list-group-item {
+  margin-top: 12px;
+}
 
 .list-group-item {
   position: relative;

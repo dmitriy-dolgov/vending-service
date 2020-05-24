@@ -49,6 +49,8 @@ class Api
             return true;
         }
 
+        //TODO: обработка (логирование) ошибки
+
         return false;
     }
 

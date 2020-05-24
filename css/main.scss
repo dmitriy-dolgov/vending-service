@@ -265,6 +265,10 @@ body {
 
 .app-list-group {
   font-size: 14px;
+
+  .list-group-item + .list-group-item {
+    margin-top: 12px;
+  }
 }
 
 .list-group-item {
