@@ -33,4 +33,9 @@ class Machine extends ItemCache
 
         return $itemsFiltered;
     }
+
+    public function getFullInfo($machineId)
+    {
+        return $this->api->command('get', 'machines/' . $machineId, ['token' => $this->api::API_KEY]);
+    }
 }
