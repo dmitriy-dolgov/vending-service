@@ -8,7 +8,7 @@ abstract class ItemCache
 
     protected $cachedItems = null;
 
-    protected $cachedItemsKeyMapped = null;
+    protected $cachedItemsKeyMapped = [];
 
 
     abstract protected function getItemsFromPrimaryRepository();
@@ -64,10 +64,10 @@ abstract class ItemCache
         return $itemsInfoArr;
     }
 
-    public function getItemsKeyMapped($keyName = 'id')
+    public function getItemsKeyMapped($keyName = 'id'): array
     {
-        if ($this->cachedItemsKeyMapped !== null) {
-            return $this->cachedItemsKeyMapped;
+        if (isset($this->cachedItemsKeyMapped[$keyName]) && is_array($this->cachedItemsKeyMapped[$keyName])) {
+            return $this->cachedItemsKeyMapped[$keyName];
         }
 
         $items = $this->getItems();
@@ -77,10 +77,10 @@ abstract class ItemCache
                 throw new \Exception('Не обнаружен требуемый ключ `' . $keyName . '`');
             }
 
-            $this->cachedItemsKeyMapped[$it[$keyName]] = $it;
+            $this->cachedItemsKeyMapped[$keyName][$it[$keyName]] = $it;
         }
 
-        return $this->cachedItemsKeyMapped;
+        return $this->cachedItemsKeyMapped[$keyName];
     }
 
     protected function ifDataValid($data)
