@@ -48,6 +48,10 @@ class Tasks extends ItemCache
 
         $apiResult = $this->api->command('post', 'tasks', ['token' => $this->api::API_KEY], $data);
 
+        if ($apiResult) {
+            $this->clearCache();
+        }
+
         return $apiResult;
     }
 }
