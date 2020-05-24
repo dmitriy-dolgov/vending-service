@@ -37,15 +37,19 @@ $(document).ready(function(){
         language: 'ru'
     });
     
+    var sels = {
+        '.task-filters': $('.task-filters')
+    };
+    
     $('.btn-filter-task-reset').click(function(e) {
         e.preventDefault();
-        $('.task-filters .combobox-selected').removeClass('combobox-selected');
-        $('.task-filters .combobox').val('');
-        $('.task-filters .filter-calendar-type input').val('');
-        $('#sel-statuses option').removeAttr('selected');
-        $('.task-filters .status-element input').prop('checked', false);
+        sels['.task-filters'].find('.combobox-selected').removeClass('combobox-selected');
+        sels['.task-filters'].find('.combobox').val('');
+        sels['.task-filters'].find('.filter-calendar-type input').val('');
+        sels['.task-filters'].find('#sel-statuses option').removeAttr('selected');
+        sels['.task-filters'].find('.status-element input').prop('checked', false);
         //TODO: неправильно работает
-        $('.task-filters .status-element .multi-select-button').text('Статус');
+        sels['.task-filters'].find('.status-element .multi-select-button').text('Статус');
         return false;
     });
 });

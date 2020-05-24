@@ -13,18 +13,22 @@ $(document).ready(function(){
     });
     dp.datepicker('setDate', 'now');
     
-    var sels = {
+    /*var sels = {
         '#modal-add-task .combobox-selected': $('#modal-add-task .combobox-selected'),
         '#modal-add-task .combobox': $('#modal-add-task .combobox'),
         '#modal-add-task .btn-create-task': $('#modal-add-task .btn-create-task')
+    };*/
+    
+    var sels = {
+        '#modal-add-task': $('#modal-add-task')
     };
     
     $('.btn-create-task-reset').click(function(e) {
         e.preventDefault();
         dp.datepicker('setDate', 'now');
-        sels['#modal-add-task .combobox-selected'].removeClass('combobox-selected');
-        sels['#modal-add-task .combobox'].val('');
-        sels['#modal-add-task .btn-create-task'].attr('disabled', true);
+        sels['#modal-add-task'].find('.combobox-selected').removeClass('combobox-selected');
+        sels['#modal-add-task'].find('.combobox').val('');
+        sels['#modal-add-task'].find('.btn-create-task').attr('disabled', true);
         return false;
     });
 });
