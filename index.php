@@ -1,5 +1,8 @@
 <?php
 
+header('Location: //' . $_SERVER['SERVER_NAME'] . '/tasks');
+exit;
+
 require 'vendor/autoload.php';
 
 use GuzzleHttp\Client;
@@ -18,7 +21,7 @@ ini_set('display_errors', 1);
 $client = new Client();
 
 $res = $client->request('GET', 'http://httpbin.org', [
-    'query' => ['foo' => 'bar']
+    'query' => ['foo' => 'bar'],
 ]);
 
 print_r($res);
