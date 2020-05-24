@@ -41,6 +41,11 @@ $(document).ready(function(){
         e.preventDefault();
         $('.task-filters .combobox-selected').removeClass('combobox-selected');
         $('.task-filters .combobox').val('');
+        $('.task-filters .filter-calendar-type input').val('');
+        $('#sel-statuses option').removeAttr('selected');
+        $('.task-filters .status-element input').prop('checked', false);
+        //TODO: неправильно работает
+        $('.task-filters .status-element .multi-select-button').text('Статус');
         return false;
     });
 });
@@ -138,7 +143,7 @@ JS;
                                 class="fa fa-calendar"></i></span></div>
             </div>
         </div>
-        <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2">
+        <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2 status-element">
             <select id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
                 <?php foreach ($htmlStatus->getItems() as $item): ?>
                     <option value="<?= $item['id'] ?>"><?= Html::encode($item['name']) ?></option>
