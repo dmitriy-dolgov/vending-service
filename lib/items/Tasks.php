@@ -38,6 +38,7 @@ class Tasks extends ItemCache
         $data = [
             'machine_id' => $machineId,
             'worker_user_id' => $workerUserId,
+            'time_finished' => date('Y-m-d H:i:s'),
             //TODO: реализовать
             //'time_created' => date('', $time),     //2020-05-23T10:29:23.787Z
         ];
