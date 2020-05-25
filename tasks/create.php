@@ -3,6 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+ob_start();
+
 require_once __DIR__ . '/../html/header.php';
 
 $action = $_POST['action'] ?? 'unknown';
@@ -73,4 +75,5 @@ if ($action === 'create-task') {
     echo 'Неверная команда';
 }
 
+ob_end_flush();
 require_once __DIR__ . '/../html/footer.php';
