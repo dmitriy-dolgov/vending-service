@@ -37,6 +37,56 @@ class Tasks extends ItemCache
 
     public function getFilteredItems()
     {
+        $itemsRaw = $this->getItems();
+
+        $itemsFiltered = [];
+
+        if (!empty($_GET['f-date_start']) || !empty($_GET['f-date_end'])) {
+            $start = $_GET['f-date_start'] ?? 0;
+            $end = $_GET['f-date_end'] ?? 32503680000;
+
+            foreach ($itemsRaw as $itm) {
+                //TODO: возможна оптимизация поскольку элементы должны быть уже отсортированы по дате в self::getItems()
+                if ($timeCreated = strtotime($itm['time_created'])) {
+                    if ($timeCreated >= $start && $timeCreated <= $end) {
+                        $itemsFiltered[] = $itm;
+                    }
+                }
+            }
+        } else {
+            $itemsFiltered = $itemsRaw;
+        }
+
+        if (!empty($_GET['f-author_user_id'])) {
+            $itemsFilteredAuthor = [];
+            foreach ($itemsFiltered as $itm) {
+                if ($_GET['f-author_user_id'] == $itm['author_user_id']) {
+                    $itemsFilteredAuthor[] = $itm;
+                }
+            }
+            $itemsFiltered = $itemsFilteredAuthor;
+        }
+
+        if (!empty($_GET['f-worker_user_id'])) {
+            $itemsFilteredWorker = [];
+            foreach ($itemsFiltered as $itm) {
+                if ($_GET['f-worker_user_id'] == $itm['worker_user_id']) {
+                    $itemsFilteredWorker[] = $itm;
+                }
+            }
+            $itemsFiltered = $itemsFilteredWorker;
+        }
+
+        if (!empty($_GET['f-status_id'])) {
+            $itemsFilteredStatus = [];
+            foreach ($itemsFiltered as $itm) {
+                if (in_array($itm['state'], $_GET['f-status_id'])) {
+                    $itemsFilteredStatus[] = $itm;
+                }
+            }
+            $itemsFiltered = $itemsFilteredStatus;
+        }
+
         $pageZeroBased = ($_GET['p_page'] ?? 1) - 1;
         $size = $_GET['p_size'] ?? 10;
 
