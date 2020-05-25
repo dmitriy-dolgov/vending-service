@@ -42,8 +42,8 @@ class Tasks extends ItemCache
         $itemsFiltered = [];
 
         if (!empty($_GET['f-date_start']) || !empty($_GET['f-date_end'])) {
-            $start = $_GET['f-date_start'] ?? 0;
-            $end = $_GET['f-date_end'] ?? 32503680000;
+            $start = isset($_GET['f-date_start']) ? strtotime($_GET['f-date_start']) : 0;
+            $end = isset($_GET['f-date_end']) ? strtotime($_GET['f-date_end']) : 32503680000;
 
             foreach ($itemsRaw as $itm) {
                 //TODO: возможна оптимизация поскольку элементы должны быть уже отсортированы по дате в self::getItems()
@@ -91,7 +91,7 @@ class Tasks extends ItemCache
         $size = $_GET['p_size'] ?? 10;
 
         //TODO: оптимизиация
-        $itemPages = array_chunk($this->getItems(), $size);
+        $itemPages = array_chunk($itemsFiltered, $size);
 
         return $itemPages[$pageZeroBased] ?? end($itemPages);
     }

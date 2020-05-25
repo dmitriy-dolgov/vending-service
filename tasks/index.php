@@ -17,6 +17,10 @@ if (($_POST['action'] ?? '') == 'filter') {
     unset($_POST['action']);
     unset($query['action']);
 
+    if (!isset($_POST['f-status_id'])) {
+        unset($query['f-status_id']);
+    }
+
     Html::uriPost2Query($query);
 
     $url = $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
@@ -52,7 +56,7 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                                 <div class="machine-state ic_pause ng-star-inserted"
                                      title="Простой"></div>
                                 <div class="ng-star-inserted">
-                                    <div class="text-warning text-bold fsz-14"><?= $divisionId ? $htmlDivisions->getItemsKeyMapped()[$divisionId]['description'] : '&nbsp;' ?></div>
+                                    <div class="text-dark fsz-14"><?= $divisionId ? $htmlDivisions->getItemsKeyMapped()[$divisionId]['description'] : '&nbsp;' ?></div>
                                     <div class="text-dark fsz-14"><?= $divisionId ? ('(' . $htmlDivisions->getItemsKeyMapped()[$divisionId]['address'] . ')') : '&nbsp;' ?></div>
                                     <div class="fsz-12"><?= $htmlMachine->getItemsKeyMapped()[$item['machine_id']]['model'] ?? '&nbsp;' ?></div>
                                 </div>
