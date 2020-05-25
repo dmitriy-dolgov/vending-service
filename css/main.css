@@ -475,6 +475,14 @@ body {
   background-image: url("/img/ic_pause.png");
 }
 
+h1 {
+  font-weight: 400;
+}
+
+.fsz-24 {
+  font-size: 24px;
+}
+
 .fsz-14 {
   font-size: 14px;
 }
@@ -723,5 +731,28 @@ h4 {
 }
 
 /* // dialog (new task) */
+.bg-white {
+  background-color: #fff !important;
+}
+.bg-white .app-icon {
+  background: center/100% no-repeat;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.not-found {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.not-found .app-icon {
+  margin: 9vmin auto 7vmin;
+  max-height: 165px;
+  max-width: 165px;
+  height: 22vmin;
+  width: 22vmin;
+}
+.not-found h1 {
+  padding: 0 0 9vmin;
+  margin: 0;
+}
 
 /*# sourceMappingURL=main.css.map */
