@@ -78,7 +78,7 @@ JS;
             <select name="f-machine_id" class="filter-machine-type combobox form-control" placeholder="Тип оборудования">
                 <option></option>
                 <?php foreach ($htmlMachine->getUnifiedItems() as $key => $item): ?>
-                    <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
+                    <option value="<?= $key ?>" <?= ($_GET['f-machine_id'] ?? '') == $key ? 'selected="selected"' : '' ?>><?= Html::encode($item) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -86,7 +86,7 @@ JS;
             <select name="f-city_id" class="filter-city-type combobox form-control" placeholder="Город">
                 <option></option>
                 <?php foreach ($htmlCities->getItems() as $item): ?>
-                    <option value="<?= $item['id'] ?>"><?= Html::encode($item['name']) ?></option>
+                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-city_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($item['name']) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -94,7 +94,7 @@ JS;
             <select name="f-division_id" class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
                 <option></option>
                 <?php foreach ($htmlDivisions->getItems() as $item): ?>
-                    <option value="<?= $item['id'] ?>"><?= Html::encode($item['description'] . ' (' . $item['address'] . ')') ?></option>
+                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-division_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($item['description'] . ' (' . $item['address'] . ')') ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -111,7 +111,7 @@ JS;
                         }
                     }
                     ?>
-                    <option value="<?= $item['id'] ?>"><?= Html::encode($uName) ?></option>
+                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-author_user_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($uName) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -128,7 +128,7 @@ JS;
                         }
                     }
                     ?>
-                    <option value="<?= $item['id'] ?>"><?= Html::encode($uName) ?></option>
+                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-worker_user_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($uName) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -136,22 +136,22 @@ JS;
                     class="col-label">Поиск по дате</label></div>
         <div class="col-lg col-sm-4 order-lg-7 order-8 mt-sm-3 mt-0"><span class="datepicker-label">с</span>
             <div class="filter-calendar-type date input-group">
-                <input name="f-date_start" type="text" class="form-control">
+                <input name="f-date_start" type="text" class="form-control" value="<?= $_GET['f-date_start'] ?? '' ?>">
                 <div class="input-group-append"><span class="input-group-text"><i
                                 class="fa fa-calendar"></i></span></div>
             </div>
         </div>
         <div class="col-lg col-sm-4 order-lg-8 order-9 mt-sm-3 mt-2"><span class="datepicker-label">по</span>
             <div class="filter-calendar-type date input-group">
-                <input name="f-date_end" type="text" class="form-control">
+                <input name="f-date_end" type="text" class="form-control" value="<?= $_GET['f-date_end'] ?? '' ?>">
                 <div class="input-group-append"><span class="input-group-text"><i
                                 class="fa fa-calendar"></i></span></div>
             </div>
         </div>
         <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2 status-element">
-            <select name="f-status_id" id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
-                <?php foreach ($htmlStatus->getItems() as $item): ?>
-                    <option value="<?= $item['id'] ?>"><?= Html::encode($item['name']) ?></option>
+            <select name="f-status_id[]" id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
+                <?php foreach ($htmlStatus->getItems() as $key => $item): ?>
+                    <option value="<?= $item['id'] ?>" <?= in_array($item['id'], ($_GET['f-status_id'] ?? [])) ? 'selected="selected"' : '' ?>><?= Html::encode($item['name']) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

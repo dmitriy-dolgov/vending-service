@@ -144,7 +144,8 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                                 echo '<li class="page-item ng-star-inserted ' . $hDisabled . '"><a class="page-link" href="' . $hLink . '">' . $pgElemData['number'] . '</a></li>';
                                 break;
                             }
-                            default: {
+                            default:
+                            {
                                 break;
                             }
                         }
@@ -153,13 +154,19 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                 </ul>
 
                 <div class="btn-group page-size-list order-first order-sm-last ng-star-inserted">
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Выводить по <strong><?= $_GET['p_size'] ?? 10 ?></strong> <span class="caret"></span></a>
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Выводить по
+                        <strong><?= $_GET['p_size'] ?? 10 ?></strong> <span class="caret"></span></a>
                     <ul class="dropdown-menu" id="menu">
-                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 10) ?>">Выводить по 10</a></li>
-                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 20) ?>">Выводить по 20</a></li>
-                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 50) ?>">Выводить по 50</a></li>
-                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 100) ?>">Выводить по 100</a></li>
-                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 200) ?>">Выводить по 200</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 10) ?>">Выводить по
+                                10</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 20) ?>">Выводить по
+                                20</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 50) ?>">Выводить по
+                                50</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 100) ?>">Выводить по
+                                100</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p_size', 200) ?>">Выводить по
+                                200</a></li>
                     </ul>
                 </div>
 

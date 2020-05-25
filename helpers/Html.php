@@ -18,7 +18,7 @@ class Html
 
     public static function handlePostUri(&$query, $name)
     {
-        if (isset($_POST[$name]) && trim($_POST[$name]) != '') {
+        if (!empty($_POST[$name]) && $_POST[$name] != '') {
             $query[$name] = $_POST[$name];
         } else {
             unset($query[$name]);
