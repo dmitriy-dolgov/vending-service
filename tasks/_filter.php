@@ -55,7 +55,8 @@ $(document).ready(function(){
 });
 JS;
 ?>
-<form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid">
+<form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
+    <input type="hidden" name="action" value="filter">
     <div class="row">
         <div class="col-xl-2 col-lg-3 col-sm-12 col-6">
             <h1 class="page-title">Задачи (<span class="task-amount"><?= $htmlTasks->getItemCount() ?></span>)</h1>
@@ -69,12 +70,12 @@ JS;
             <button class="btn app-btn btn-secondary btn-filter-task-reset" type="reset">Сбросить фильтры</button>
         </div>
         <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-2">
-            <button class="btn app-btn btn-primary" type="button">Применить фильтры</button>
+            <button class="btn app-btn btn-primary" type="submit">Применить фильтры</button>
         </div>
     </div>
     <div class="row fields-row mt-3">
         <div class="col-lg col-md-4 col-sm-6 order-lg-1 mt-sm-0">
-            <select class="filter-machine-type combobox form-control" placeholder="Тип оборудования">
+            <select name="f-machine_id" class="filter-machine-type combobox form-control" placeholder="Тип оборудования">
                 <option></option>
                 <?php foreach ($htmlMachine->getUnifiedItems() as $key => $item): ?>
                     <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
@@ -82,7 +83,7 @@ JS;
             </select>
         </div>
         <div class="col-lg col-md-4 col-sm-6 order-lg-2 mt-sm-0 mt-2">
-            <select class="filter-city-type combobox form-control" placeholder="Город">
+            <select name="f-city_id" class="filter-city-type combobox form-control" placeholder="Город">
                 <option></option>
                 <?php foreach ($htmlCities->getItems() as $item): ?>
                     <option value="<?= $item['id'] ?>"><?= Html::encode($item['name']) ?></option>
@@ -90,7 +91,7 @@ JS;
             </select>
         </div>
         <div class="col-lg col-md-4 col-sm-12 order-lg-3 mt-md-0 mt-sm-3 mt-2">
-            <select class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
+            <select name="f-division_id" class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
                 <option></option>
                 <?php foreach ($htmlDivisions->getItems() as $item): ?>
                     <option value="<?= $item['id'] ?>"><?= Html::encode($item['description'] . ' (' . $item['address'] . ')') ?></option>
@@ -98,7 +99,7 @@ JS;
             </select>
         </div>
         <div class="col-lg col-sm-4 order-lg-4 mt-lg-0 mt-sm-3 mt-2">
-            <select id="filter-creator" class="filter-creator-type combobox form-control" placeholder="Создатель">
+            <select name="f-author_user_id" id="filter-creator" class="filter-creator-type combobox form-control" placeholder="Создатель">
                 <option></option>
                 <?php
                 foreach ($htmlUsers->getItems() as $item):
@@ -115,7 +116,7 @@ JS;
             </select>
         </div>
         <div class="col-lg col-sm-4 order-lg-5 mt-lg-0 mt-sm-3 mt-2">
-            <select id="filter-creator" class="filter-executor-type combobox form-control" placeholder="Исполнитель">
+            <select name="f-worker_user_id" id="filter-creator" class="filter-executor-type combobox form-control" placeholder="Исполнитель">
                 <option></option>
                 <?php
                 foreach ($htmlUsers->getItems() as $item):
@@ -135,20 +136,20 @@ JS;
                     class="col-label">Поиск по дате</label></div>
         <div class="col-lg col-sm-4 order-lg-7 order-8 mt-sm-3 mt-0"><span class="datepicker-label">с</span>
             <div class="filter-calendar-type date input-group">
-                <input type="text" class="form-control">
+                <input name="f-date_start" type="text" class="form-control">
                 <div class="input-group-append"><span class="input-group-text"><i
                                 class="fa fa-calendar"></i></span></div>
             </div>
         </div>
         <div class="col-lg col-sm-4 order-lg-8 order-9 mt-sm-3 mt-2"><span class="datepicker-label">по</span>
             <div class="filter-calendar-type date input-group">
-                <input type="text" class="form-control">
+                <input name="f-date_end" type="text" class="form-control">
                 <div class="input-group-append"><span class="input-group-text"><i
                                 class="fa fa-calendar"></i></span></div>
             </div>
         </div>
         <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2 status-element">
-            <select id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
+            <select name="f-status_id" id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
                 <?php foreach ($htmlStatus->getItems() as $item): ?>
                     <option value="<?= $item['id'] ?>"><?= Html::encode($item['name']) ?></option>
                 <?php endforeach; ?>

@@ -43,7 +43,7 @@ JS;
                     <button type="button" class="close" data-dismiss="modal"></button>
                 </div>
 
-                <form class="ng-pristine ng-invalid ng-untouched" method="post" action="/tasks/create.php">
+                <form autocomplete="off" class="ng-pristine ng-invalid ng-untouched" method="post" action="/tasks/create.php">
                     <input type="hidden" name="action" value="create-task">
                     <div class="mat-dialog-content">
                         <div class="row">

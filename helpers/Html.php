@@ -15,4 +15,20 @@ class Html
         $query[$getVarName] = $getVarValue;
         return $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
     }
+
+    public static function handlePostUri(&$query, $name)
+    {
+        if (isset($_POST[$name]) && trim($_POST[$name]) != '') {
+            $query[$name] = $_POST[$name];
+        } else {
+            unset($query[$name]);
+        }
+    }
+
+    public static function uriPost2Query(&$query)
+    {
+        foreach ($_POST as $name => $val) {
+            self::handlePostUri($query, $name);
+        }
+    }
 }

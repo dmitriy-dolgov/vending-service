@@ -10,6 +10,20 @@ use lib\items\Divisions;
 use lib\items\Status;
 use helpers\Html;
 
+
+if (($_POST['action'] ?? '') == 'filter') {
+    $query = $_GET;
+
+    unset($_POST['action']);
+    unset($query['action']);
+
+    Html::uriPost2Query($query);
+
+    $url = $_SERVER['PHP_SELF'] . '?' . http_build_query($query);
+    header('Location: //' . $_SERVER['SERVER_NAME'] . $url);
+    exit;
+}
+
 $htmlTasks = new Tasks();
 
 $htmlMachine = new Machine();
