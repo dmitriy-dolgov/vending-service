@@ -98,4 +98,11 @@ abstract class ItemCache
 
         return is_array($items) ? count($items) : 0;
     }
+
+    protected function orderByDate(array &$itemList, string $fieldName)
+    {
+        usort($itemList, function ($a, $b) use ($fieldName) {
+            return strcmp(strtotime($a[$fieldName]), strtotime($b[$fieldName]));
+        });
+    }
 }

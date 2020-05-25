@@ -22,9 +22,28 @@ class Tasks extends ItemCache
 
     public function getItems()
     {
-        $items = parent::getItems();
+        if ($this->cachedItems !== null) {
+            return $this->cachedItems;
+        }
 
-        return $items['tasks'] ?? [];
+        $items = $this->getItemsFromPrimaryRepository();
+
+        $this->cachedItems = $items['tasks'] ?? [];
+
+        $this->orderByDate($this->cachedItems, 'time_created');
+
+        return $this->cachedItems;
+    }
+
+    public function getFilteredItems()
+    {
+        $pageZeroBased = ($_GET['p_page'] ?? 1) - 1;
+        $size = $_GET['p_size'] ?? 10;
+
+        //TODO: оптимизиация
+        $itemPages = array_chunk($this->getItems(), $size);
+
+        return $itemPages[$pageZeroBased] ?? end($itemPages);
     }
 
     public function newItem($divisionId, $workerUserId, $timeCreated, $comment = null)

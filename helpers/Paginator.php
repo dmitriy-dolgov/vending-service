@@ -15,8 +15,8 @@ class Paginator
     {
         $this->elemsTotal = $elemsTotal;
 
-        $this->elemsOnPage = $_GET['p']['count'] ?? 10;
-        $this->currentPage = $_GET['p']['page'] ?? 1;
+        $this->elemsOnPage = $_GET['p_size'] ?? 10;
+        $this->currentPage = $_GET['p_page'] ?? 1;
     }
 
     public function getElemsOnPage()
@@ -33,7 +33,7 @@ class Paginator
     {
         yield 'prev' => [
             'active' => ($this->currentPage > 1),
-            'link' => Html::setGetValue('p[page]', $this->currentPage - 1),
+            'link' => Html::setGetValue('p_page', $this->currentPage - 1),
         ];
 
         $pages = ceil($this->elemsTotal / $this->elemsOnPage);
@@ -42,14 +42,14 @@ class Paginator
             $currPageNum = $i + 1;
             yield 'button' => [
                 'active' => ($this->currentPage != $currPageNum),
-                'link' => Html::setGetValue('p[page]', $currPageNum),
+                'link' => Html::setGetValue('p_page', $currPageNum),
                 'number' => $currPageNum,
             ];
         }
 
         yield 'next' => [
             'active' => ($this->currentPage < $pages),
-            'link' => Html::setGetValue('p[page]', $this->currentPage + 1),
+            'link' => Html::setGetValue('p_page', $this->currentPage + 1),
         ];
     }
 
