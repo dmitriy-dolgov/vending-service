@@ -103,21 +103,9 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
             <?php endforeach; ?>
         </ul>
 
-        <div>
+        <div class="_ngcontent-svo">
             <nav class="ng-star-inserted">
                 <ul class="pagination ng-star-inserted">
-                    <!--<li class="page-item disabled"><a class="page-link"> &lt;&lt; </a>
-                    </li>
-                    <li class="page-item active ng-star-inserted"><a
-                                class="page-link" href="<?/*= Html::setGetValue('p[page]', 10) */?>">1</a></li>
-                    <li class="page-item ng-star-inserted"><a
-                                class="page-link">2</a></li>
-                    <li class="page-item ng-star-inserted"><a
-                                class="page-link">3</a></li>
-                    <li class="page-item ng-star-inserted"><a
-                                class="page-link">4</a></li>
-                    <li class="page-item"><a class="page-link"> &gt;&gt; </a>
-                    </li>-->
                     <?php
                     foreach ($paginator->traverse() as $pgElemName => $pgElemData) {
                         switch ($pgElemName) {
@@ -137,7 +125,7 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                             }
                             case 'button':
                             {
-                                $hDisabled = $pgElemData['active'] ? '' : 'disabled';
+                                $hDisabled = $pgElemData['active'] ? '' : 'disabled active';
                                 $hLink = Html::encode($pgElemData['link']);
                                 echo '<li class="page-item ng-star-inserted ' . $hDisabled . '"><a class="page-link" href="' . $hLink . '">' . $pgElemData['number'] . '</a></li>';
                                 break;
@@ -150,8 +138,8 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                     ?>
                 </ul>
 
-                <div class="btn-group">
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Выводить по <?= $_GET['p']['count'] ?? 10 ?> <span class="caret"></span></a>
+                <div class="btn-group page-size-list order-first order-sm-last ng-star-inserted">
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Выводить по <strong><?= $_GET['p']['count'] ?? 10 ?></strong> <span class="caret"></span></a>
                     <ul class="dropdown-menu" id="menu">
                         <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p[count]', 10) ?>">Выводить по 10</a></li>
                         <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p[count]', 20) ?>">Выводить по 20</a></li>
