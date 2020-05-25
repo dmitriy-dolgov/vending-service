@@ -8,7 +8,7 @@ use lib\items\Cities;
 use lib\items\Users;
 use lib\items\Divisions;
 use lib\items\Status;
-
+use helpers\Html;
 
 $htmlTasks = new Tasks();
 
@@ -18,8 +18,9 @@ $htmlUsers = new Users();
 $htmlDivisions = new Divisions();
 $htmlStatus = new Status();
 
-?>
+$paginator = new \helpers\Paginator($htmlTasks->getItemCount());
 
+?>
     <div class="py-4">
 
         <?php require '_filter.php'; ?>
@@ -101,6 +102,67 @@ $htmlStatus = new Status();
                 </li>
             <?php endforeach; ?>
         </ul>
+
+        <div>
+            <nav class="ng-star-inserted">
+                <ul class="pagination ng-star-inserted">
+                    <!--<li class="page-item disabled"><a class="page-link"> &lt;&lt; </a>
+                    </li>
+                    <li class="page-item active ng-star-inserted"><a
+                                class="page-link" href="<?/*= Html::setGetValue('p[page]', 10) */?>">1</a></li>
+                    <li class="page-item ng-star-inserted"><a
+                                class="page-link">2</a></li>
+                    <li class="page-item ng-star-inserted"><a
+                                class="page-link">3</a></li>
+                    <li class="page-item ng-star-inserted"><a
+                                class="page-link">4</a></li>
+                    <li class="page-item"><a class="page-link"> &gt;&gt; </a>
+                    </li>-->
+                    <?php
+                    foreach ($paginator->traverse() as $pgElemName => $pgElemData) {
+                        switch ($pgElemName) {
+                            case 'prev':
+                            {
+                                $hDisabled = $pgElemData['active'] ? '' : 'disabled';
+                                $hLink = Html::encode($pgElemData['link']);
+                                echo '<li class="page-item ' . $hDisabled . '"><a class="page-link" href="' . $hLink . '"> &lt;&lt; </a></li>';
+                                break;
+                            }
+                            case 'next':
+                            {
+                                $hDisabled = $pgElemData['active'] ? '' : 'disabled';
+                                $hLink = Html::encode($pgElemData['link']);
+                                echo '<li class="page-item ' . $hDisabled . '"><a class="page-link" href="' . $hLink . '"> &gt;&gt; </a></li>';
+                                break;
+                            }
+                            case 'button':
+                            {
+                                $hDisabled = $pgElemData['active'] ? '' : 'disabled';
+                                $hLink = Html::encode($pgElemData['link']);
+                                echo '<li class="page-item ng-star-inserted ' . $hDisabled . '"><a class="page-link" href="' . $hLink . '">' . $pgElemData['number'] . '</a></li>';
+                                break;
+                            }
+                            default: {
+                                break;
+                            }
+                        }
+                    }
+                    ?>
+                </ul>
+
+                <div class="btn-group">
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Выводить по <?= $_GET['p']['count'] ?? 10 ?> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="menu">
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p[count]', 10) ?>">Выводить по 10</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p[count]', 20) ?>">Выводить по 20</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p[count]', 50) ?>">Выводить по 50</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p[count]', 100) ?>">Выводить по 100</a></li>
+                        <li class="dropdown-item px-2"><a href="<?= Html::setGetValue('p[count]', 200) ?>">Выводить по 200</a></li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
 
     </div>
 
