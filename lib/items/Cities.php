@@ -16,13 +16,11 @@ class Cities extends ItemCache
 
     protected function getItemsFromPrimaryRepository()
     {
-        return [
-            ['id' => '6627', 'name' => 'Абакам'],
-            ['id' => '6628', 'name' => 'Азнакаево'],
-            ['id' => '6629', 'name' => 'Альметьевск'],
-            ['id' => '6630', 'name' => 'Астрахань'],
-            ['id' => '6631', 'name' => 'Благовещенск'],
-        ];
+        return $this->api->command('get', 'cities', [
+            'token' => $this->api::API_KEY,
+            //TODO: уточнить у апишников зачем так делать чтобы вернуть записей больше чем 20(?)
+            'size' => 999999,
+        ]);
     }
 
     public function getItems()
