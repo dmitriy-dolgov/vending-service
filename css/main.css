@@ -755,4 +755,8 @@ h4 {
   margin: 0;
 }
 
+.dropdown-item {
+  white-space: normal;
+}
+
 /*# sourceMappingURL=main.css.map */
