@@ -86,7 +86,7 @@ JS;
             <select name="f-city_id" class="filter-city-type combobox form-control" placeholder="Город">
                 <option></option>
                 <?php foreach ($htmlCities->getItems() as $item): ?>
-                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-city_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($item['name']) ?></option>
+                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-city_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($item['description']) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

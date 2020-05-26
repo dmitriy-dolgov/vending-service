@@ -54,7 +54,7 @@ JS;
                                 <select class="filter-city-type combobox form-control" name="city_id">
                                     <option></option>
                                     <?php foreach ($htmlCities->getItems() as $item): ?>
-                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['name']) ?></option>
+                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['description']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
