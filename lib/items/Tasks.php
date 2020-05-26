@@ -28,7 +28,9 @@ class Tasks extends ItemCache
 
         $items = $this->getItemsFromPrimaryRepository();
 
-        $this->cachedItems = $items['tasks'] ?? [];
+        //$this->cachedItems = $items['tasks'] ?? [];
+
+        $this->cachedItems = $items ?? [];
 
         $this->orderByDate($this->cachedItems, 'time_created');
 
