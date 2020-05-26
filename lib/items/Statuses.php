@@ -20,4 +20,20 @@ class Statuses extends ItemCache
             ['id' => '4', 'name' => 'Удалено'],
         ];
     }
+
+    /**
+     * ID бывает иногда 0 - обработаем это.
+     *
+     * @param $id
+     * @return array
+     * @throws \Exception
+     */
+    public function getItemByIdCorrected($id)
+    {
+        if (!$id) {
+            $id = 1;
+        }
+
+        return $this->getItemsKeyMapped()[$id];
+    }
 }

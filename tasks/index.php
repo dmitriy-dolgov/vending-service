@@ -107,7 +107,7 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-5 order-md-2">
                                 <div class="item-heading fsz-9 text-nowrap">Статус</div>
-                                <div class="text-dark fsz-12"><?= $htmlStatuses->getItemsKeyMapped()[$item['state']]['name'] ?></div>
+                                <div class="text-dark fsz-12"><?= $htmlStatuses->getItemByIdCorrected($item['state'])['name'] ?></div>
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-6 order-md-7">
                                 <div class="item-heading fsz-9 text-nowrap">&nbsp;</div>
