@@ -14,10 +14,10 @@ class Statuses extends ItemCache
     public function getItems()
     {
         return [
-            ['id' => '0', 'name' => 'Создано'],
-            ['id' => '1', 'name' => 'Выполняется'],
-            ['id' => '2', 'name' => 'Завершено'],
-            ['id' => '3', 'name' => 'Удалено'],
+            ['id' => '1', 'name' => 'Создано'],
+            ['id' => '2', 'name' => 'Выполняется'],
+            ['id' => '3', 'name' => 'Завершено'],
+            ['id' => '4', 'name' => 'Удалено'],
         ];
     }
 }
