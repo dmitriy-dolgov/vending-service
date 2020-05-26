@@ -4,7 +4,7 @@ namespace lib\items;
 
 use lib\ItemCache;
 
-class Status extends ItemCache
+class Statuses extends ItemCache
 {
     public function getItemsFromPrimaryRepository()
     {

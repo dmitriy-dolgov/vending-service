@@ -1,13 +1,15 @@
 <?php
 
+ob_start();
+
 require_once __DIR__ . '/../html/header.php';
 
 use lib\items\Tasks;
-use lib\items\Machine;
+use lib\items\Machines;
 use lib\items\Cities;
 use lib\items\Users;
 use lib\items\Divisions;
-use lib\items\Status;
+use lib\items\Statuses;
 use helpers\Html;
 
 
@@ -28,13 +30,15 @@ if (($_POST['action'] ?? '') == 'filter') {
     exit;
 }
 
+ob_end_flush();
+
 $htmlTasks = new Tasks();
 
-$htmlMachine = new Machine();
+$htmlMachines = new Machines();
 $htmlCities = new Cities();
 $htmlUsers = new Users();
 $htmlDivisions = new Divisions();
-$htmlStatus = new Status();
+$htmlStatuses = new Statuses();
 
 $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
 
@@ -48,7 +52,7 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
             $filteredItems = $htmlTasks->getFilteredItems();
             if ($filteredItems):
                 foreach ($filteredItems as $item):
-                    $divisionId = $htmlMachine->getFullInfo($item['machine_id'])['division_id'] ?? false;
+                    $divisionId = $htmlMachines->getFullInfo($item['machine_id'])['division_id'] ?? false;
                     ?>
                     <li class="list-group-item ng-star-inserted">
                         <div class="row">
@@ -56,9 +60,13 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                                 <div class="machine-state ic_pause ng-star-inserted"
                                      title="Простой"></div>
                                 <div class="ng-star-inserted">
-                                    <div class="text-dark fsz-14"><?= $divisionId ? $htmlDivisions->getItemsKeyMapped()[$divisionId]['description'] : '&nbsp;' ?></div>
-                                    <div class="text-dark fsz-14"><?= $divisionId ? ('(' . $htmlDivisions->getItemsKeyMapped()[$divisionId]['address'] . ')') : '&nbsp;' ?></div>
-                                    <div class="fsz-12"><?= $htmlMachine->getItemsKeyMapped()[$item['machine_id']]['model'] ?? '&nbsp;' ?></div>
+                                    <?php
+                                    $divn['description'] = $htmlDivisions->getItemsKeyMapped()[$divisionId]['description'] ?? 'неизвестно (ID: ' . $divisionId . ')';
+                                    $divn['address'] = $htmlDivisions->getItemsKeyMapped()[$divisionId]['address'] ?? 'неизвестно (ID: ' . $divisionId . ')';
+                                    ?>
+                                    <div class="text-dark fsz-14"><?= $divisionId ? $divn['description'] : '&nbsp;' ?></div>
+                                    <div class="text-dark fsz-14"><?= $divisionId ? ('(' . $divn['address'] . ')') : '&nbsp;' ?></div>
+                                    <div class="fsz-12"><?= $htmlMachines->getItemsKeyMapped()[$item['machine_id']]['model'] ?? '&nbsp;' ?></div>
                                 </div>
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-2 order-md-4">
@@ -99,7 +107,7 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-5 order-md-2">
                                 <div class="item-heading fsz-9 text-nowrap">Статус</div>
-                                <div class="text-dark fsz-12"><?= $htmlStatus->getItemsKeyMapped()[$item['state']]['name'] ?></div>
+                                <div class="text-dark fsz-12"><?= $htmlStatuses->getItemsKeyMapped()[$item['state']]['name'] ?></div>
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-6 order-md-7">
                                 <div class="item-heading fsz-9 text-nowrap">&nbsp;</div>
@@ -112,7 +120,8 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                                                                                 name="ic_edit"
                                                                                 style="display: block; background-image: url(/img/ic_edit.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></div></span>
                                     </button>
-                                    <button class="mx-2 mat-icon-button"><span
+                                    <button class="mx-2 mat-icon-button" data-toggle="modal"
+                                            data-target="#modal-remove-task"><span
                                                 class="mat-button-wrapper"><div class="app-icon"
                                                                                 style="display: block; background-image: url(/img/ic_delete.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></div></span>
                                     </button>
@@ -184,6 +193,31 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
             </div>
         <?php endif; ?>
 
+    </div>
+
+    <div id="modal-remove-task" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="dialog-header">
+                        <h4 class="heading color-gray">Вы уверены, что хотите удалить задачу?</h4>
+                        <button type="button" class="close" data-dismiss="modal"></button>
+                    </div>
+
+                    <form autocomplete="off" class="ng-pristine ng-invalid ng-untouched" method="post"
+                          action="/tasks/remove.php">
+                        <input type="hidden" name="action" value="remove-task">
+                        <div class="mat-dialog-actions">
+                            <button class="btn app-btn btn-secondary btn-create-task-reset" type="reset">Удалить
+                            </button>
+                            <button class="btn app-btn btn-primary disabled btn-create-task" type="submit">Отмена
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 <?php

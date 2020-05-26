@@ -77,7 +77,7 @@ JS;
         <div class="col-lg col-md-4 col-sm-6 order-lg-1 mt-sm-0">
             <select name="f-machine_id" class="filter-machine-type combobox form-control" placeholder="Тип оборудования">
                 <option></option>
-                <?php foreach ($htmlMachine->getUnifiedItems() as $key => $item): ?>
+                <?php foreach ($htmlMachines->getUnifiedItems() as $key => $item): ?>
                     <option value="<?= $key ?>" <?= ($_GET['f-machine_id'] ?? '') == $key ? 'selected="selected"' : '' ?>><?= Html::encode($item) ?></option>
                 <?php endforeach; ?>
             </select>
@@ -150,7 +150,7 @@ JS;
         </div>
         <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2 status-element">
             <select name="f-status_id[]" id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
-                <?php foreach ($htmlStatus->getItems() as $key => $item): ?>
+                <?php foreach ($htmlStatuses->getItems() as $key => $item): ?>
                     <option value="<?= $item['id'] ?>" <?= in_array($item['id'], ($_GET['f-status_id'] ?? [])) ? 'selected="selected"' : '' ?>><?= Html::encode($item['name']) ?></option>
                 <?php endforeach; ?>
             </select>

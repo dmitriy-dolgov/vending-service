@@ -5,7 +5,7 @@ namespace lib\items;
 use lib\Api;
 use lib\ItemCache;
 
-class Machine extends ItemCache
+class Machines extends ItemCache
 {
     protected $api;
 

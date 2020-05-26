@@ -13,12 +13,6 @@ $(document).ready(function(){
     });
     dp.datepicker('setDate', 'now');
     
-    /*var sels = {
-        '#modal-add-task .combobox-selected': $('#modal-add-task .combobox-selected'),
-        '#modal-add-task .combobox': $('#modal-add-task .combobox'),
-        '#modal-add-task .btn-create-task': $('#modal-add-task .btn-create-task')
-    };*/
-    
     var sels = {
         '#modal-add-task': $('#modal-add-task')
     };
@@ -43,14 +37,15 @@ JS;
                     <button type="button" class="close" data-dismiss="modal"></button>
                 </div>
 
-                <form autocomplete="off" class="ng-pristine ng-invalid ng-untouched" method="post" action="/tasks/create.php">
+                <form autocomplete="off" class="ng-pristine ng-invalid ng-untouched" method="post"
+                      action="/tasks/create.php">
                     <input type="hidden" name="action" value="create-task">
                     <div class="mat-dialog-content">
                         <div class="row">
                             <div class="col-sm-6 col-lg-3">
                                 <select class="filter-machine-type combobox form-control" name="machine_id">
                                     <option></option>
-                                    <?php foreach ($htmlMachine->getUnifiedItems() as $key => $item): ?>
+                                    <?php foreach ($htmlMachines->getUnifiedItems() as $key => $item): ?>
                                         <option value="<?= $key ?>"><?= Html::encode($item) ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -64,7 +59,8 @@ JS;
                                 </select>
                             </div>
                             <div class="col-sm-6 col-lg-3">
-                                <select id="filter-creator" class="filter-assign-executor-type combobox form-control" name="worder_id">
+                                <select id="filter-creator" class="filter-assign-executor-type combobox form-control"
+                                        name="worder_id">
                                     <option></option>
                                     <?php
                                     foreach ($htmlUsers->getItems() as $item):
@@ -96,10 +92,11 @@ JS;
                                 </select>
                             </div>
                             <div class="col-sm-12 col-lg-6">
-                                <select class="filter-outlet-type-add-machine combobox form-control" name="division_id_equipment">
+                                <select class="filter-outlet-type-add-machine combobox form-control"
+                                        name="division_id_equipment">
                                     <option></option>
                                     <?php foreach ($htmlDivisions->getItems() as $item): ?>
-                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['address'] . ' (' . $htmlMachine->getItemsKeyMapped()[$item['id']]['serial_number'] . ')') ?></option>
+                                        <option value="<?= $item['id'] ?>"><?= Html::encode($item['address'] . ' (' . $htmlMachines->getItemsKeyMapped()[$item['id']]['serial_number'] . ')') ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
