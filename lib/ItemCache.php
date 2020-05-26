@@ -39,7 +39,7 @@ abstract class ItemCache
 
         $itemsInfoArr = null;
 
-        $cfp = $this->getCachedFilePath();
+        /*$cfp = $this->getCachedFilePath();
 
         if (is_file($cfp)) {
             if ($itemsInfoJson = file_get_contents($cfp)) {
@@ -49,14 +49,14 @@ abstract class ItemCache
                     return null;
                 }
             }
-        }
+        }*/
 
         if ($itemsInfoArr === null) {
             $itemsInfoArr = $this->getItemsFromPrimaryRepository();
             if (!$this->ifDataValid($itemsInfoArr)) {
                 return null;
             }
-            file_put_contents($cfp, json_encode($itemsInfoArr));
+            //file_put_contents($cfp, json_encode($itemsInfoArr));
         }
 
         $this->cachedItems = $itemsInfoArr;
