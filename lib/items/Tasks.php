@@ -17,7 +17,11 @@ class Tasks extends ItemCache
 
     protected function getItemsFromPrimaryRepository()
     {
-        return $this->api->command('get', 'tasks', ['token' => $this->api::API_KEY]);
+        return $this->api->command('get', 'tasks', [
+            'token' => $this->api::API_KEY,
+            //TODO: проверить не надо ли так делать (когда записей будет больше 20)
+            //'size' => 999999,
+        ]);
     }
 
     public function getItems()

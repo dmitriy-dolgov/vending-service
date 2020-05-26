@@ -16,7 +16,11 @@ class Users extends ItemCache
 
     protected function getItemsFromPrimaryRepository()
     {
-        return $this->api->command('get', 'users', ['token' => $this->api::API_KEY]);
+        return $this->api->command('get', 'users', [
+            'token' => $this->api::API_KEY,
+            //TODO: уточнить у апишников зачем так делать чтобы вернуть записей больше чем 20(?)
+            'size' => 999999,
+        ]);
     }
 
     public function getItems()
