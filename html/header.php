@@ -6,7 +6,7 @@ define('APP_DIR', realpath(__DIR__ . '/..') . '/');
 //require APP_DIR . 'vendor/autoload.php';
 
 ini_set('log_errors', 1);
-ini_set('error_log', APP_DIR . 'runtime/log/php-livemaster-error.log');
+ini_set('error_log', APP_DIR . 'runtime/log/error.log');
 error_reporting(E_ALL);
 
 if (LM_DEBUG) {
