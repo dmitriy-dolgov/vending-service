@@ -29,4 +29,14 @@ class Cities extends ItemCache
 
         return $items;
     }
+
+    public function getCityNameById($id)
+    {
+        $cityName = '';
+        if (!empty($id)) {
+            $cityName = $this->getItemsKeyMapped()[$id]['description'] ?? '';
+        }
+
+        return $cityName;
+    }
 }

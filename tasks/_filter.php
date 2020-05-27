@@ -55,7 +55,8 @@ $(document).ready(function(){
 });
 JS;
 ?>
-<form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
+<form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid" method="post"
+      action="<?= $_SERVER['REQUEST_URI'] ?>">
     <input type="hidden" name="action" value="filter">
     <div class="row">
         <div class="col-xl-2 col-lg-3 col-sm-12 col-6">
@@ -75,11 +76,11 @@ JS;
     </div>
     <div class="row fields-row mt-3">
         <div class="col-lg col-md-4 col-sm-6 order-lg-1 mt-sm-0">
-            <select name="f-machine_id" class="filter-machine-type combobox form-control" placeholder="Тип оборудования">
+            <select name="f-machine_id" class="filter-machine-type combobox form-control"
+                    placeholder="Тип оборудования">
                 <option></option>
-                <?php foreach ($htmlMachines->getUnifiedItems() as $key => $item): ?>
-                    <option value="<?= $key ?>" <?= ($_GET['f-machine_id'] ?? '') == $key ? 'selected="selected"' : '' ?>><?= Html::encode($item) ?></option>
-                <?php endforeach; ?>
+                <option>Напольный кофеавтомат</option>
+                <option>Настольный кофеавтомат</option>
             </select>
         </div>
         <div class="col-lg col-md-4 col-sm-6 order-lg-2 mt-sm-0 mt-2">
@@ -94,12 +95,22 @@ JS;
             <select name="f-division_id" class="filter-outlet-type combobox form-control" placeholder="Торговая точка">
                 <option></option>
                 <?php foreach ($htmlDivisions->getItems() as $item): ?>
-                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-division_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($item['description'] . ' (' . $item['address'] . ')') ?></option>
+                    <?php
+                    $cityName = $item['city'] ?? '';
+                    if (empty($cityName) && !empty($item['city_id'])) {
+                        $cityName = $htmlCities->getCityNameById($item['city_id']);
+                    }
+                    if ($cityName) {
+                        $cityName = ', г. ' . $cityName;
+                    }
+                    ?>
+                    <option value="<?= $item['id'] ?>" <?= ($_GET['f-division_id'] ?? '') == $item['id'] ? 'selected="selected"' : '' ?>><?= Html::encode($item['description'] . ' (' . trim($item['address'], ", \t\n\r\0\x0B") . $cityName . ')') ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
         <div class="col-lg col-sm-4 order-lg-4 mt-lg-0 mt-sm-3 mt-2">
-            <select name="f-author_user_id" id="filter-creator" class="filter-creator-type combobox form-control" placeholder="Создатель">
+            <select name="f-author_user_id" id="filter-creator" class="filter-creator-type combobox form-control"
+                    placeholder="Создатель">
                 <option></option>
                 <?php
                 foreach ($htmlUsers->getItems() as $item):
@@ -116,7 +127,8 @@ JS;
             </select>
         </div>
         <div class="col-lg col-sm-4 order-lg-5 mt-lg-0 mt-sm-3 mt-2">
-            <select name="f-worker_user_id" id="filter-creator" class="filter-executor-type combobox form-control" placeholder="Исполнитель">
+            <select name="f-worker_user_id" id="filter-creator" class="filter-executor-type combobox form-control"
+                    placeholder="Исполнитель">
                 <option></option>
                 <?php
                 foreach ($htmlUsers->getItems() as $item):
@@ -149,9 +161,11 @@ JS;
             </div>
         </div>
         <div class="col-lg col-sm-4 order-lg-9 order-6 mt-sm-3 mt-2 status-element">
-            <select name="f-status_id[]" id="sel-statuses" class="filter-status-type form-control" placeholder="Статус" multiple>
+            <select name="f-status_id[]" id="sel-statuses" class="filter-status-type form-control" placeholder="Статус"
+                    multiple>
                 <?php foreach ($htmlStatuses->getItems() as $key => $item): ?>
-                    <option value="<?= $item['id'] ?>" <?= in_array($item['id'], ($_GET['f-status_id'] ?? [])) ? 'selected="selected"' : '' ?>><?= Html::encode($item['name']) ?></option>
+                    <option value="<?= $item['id'] ?>" <?= in_array($item['id'],
+                        ($_GET['f-status_id'] ?? [])) ? 'selected="selected"' : '' ?>><?= Html::encode($item['name']) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
