@@ -52,7 +52,6 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
             $filteredItems = $htmlTasks->getFilteredItems();
             if ($filteredItems):
                 foreach ($filteredItems as $item):
-                    $divisionId = $htmlMachines->getFullInfo($item['machine_id'])['division_id'] ?? false;
                     ?>
                     <li class="list-group-item ng-star-inserted">
                         <div class="row">
@@ -60,13 +59,9 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                                 <div class="machine-state ic_pause ng-star-inserted"
                                      title="Простой"></div>
                                 <div class="ng-star-inserted">
-                                    <?php
-                                    $divn['description'] = $htmlDivisions->getItemsKeyMapped()[$divisionId]['description'] ?? 'неизвестно (ID: ' . $divisionId . ')';
-                                    $divn['address'] = $htmlDivisions->getItemsKeyMapped()[$divisionId]['address'] ?? 'неизвестно (ID: ' . $divisionId . ')';
-                                    ?>
-                                    <div class="text-dark fsz-14"><?= $divisionId ? $divn['description'] : '&nbsp;' ?></div>
-                                    <div class="text-dark fsz-14"><?= $divisionId ? ('(' . $divn['address'] . ')') : '&nbsp;' ?></div>
-                                    <div class="fsz-12"><?= $htmlMachines->getItemsKeyMapped()[$item['machine_id']]['model'] ?? '&nbsp;' ?></div>
+                                    <div class="text-dark fsz-14"><?= $item['client'] ?></div>
+                                    <div class="text-dark fsz-14"><?= '(' . $item['address'] . ')' ?></div>
+                                    <div class="fsz-12"><?= $item['machine_name'] ?></div>
                                 </div>
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-2 order-md-4">
@@ -196,7 +191,7 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
     </div>
 
     <div id="modal-remove-task" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="dialog-header">
@@ -208,9 +203,9 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                           action="/tasks/remove.php">
                         <input type="hidden" name="action" value="remove-task">
                         <div class="mat-dialog-actions">
-                            <button class="btn app-btn btn-secondary btn-create-task-reset" type="reset">Удалить
+                            <button class="btn app-btn btn-danger" type="submit">Удалить
                             </button>
-                            <button class="btn app-btn btn-primary disabled btn-create-task" type="submit">Отмена
+                            <button class="btn app-btn btn-secondary" data-dismiss="modal">Отмена
                             </button>
                         </div>
                     </form>

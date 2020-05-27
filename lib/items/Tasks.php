@@ -9,6 +9,10 @@ class Tasks extends ItemCache
 {
     protected $api;
 
+    protected $cachedFilteredItems = null;
+
+    protected $itemsTotal = null;
+
 
     public function __construct()
     {
@@ -41,7 +45,67 @@ class Tasks extends ItemCache
         return $this->cachedItems;
     }
 
+    public function getItemCount()
+    {
+        if ($this->itemsTotal !== null) {
+            return $this->itemsTotal;
+        }
+
+        $this->getFilteredItems();
+
+        return $this->itemsTotal ?? 0;
+    }
+
     public function getFilteredItems()
+    {
+        if ($this->cachedFilteredItems !== null) {
+            return $this->cachedFilteredItems;
+        }
+
+        $apiData = [
+            'token' => $this->api::API_KEY,
+            //TODO: проверить не надо ли так делать (когда записей будет больше 20)
+            //'size' => 999999,
+        ];
+
+        if (!empty($_GET['f-date_start'])) {
+            if ($fDateStart = strtotime($_GET['f-date_start'])) {
+                $apiData['from'] = date('Y-m-d', $fDateStart);
+            }
+        }
+
+        if (!empty($_GET['f-date_end'])) {
+            if ($fDateEnd = strtotime($_GET['f-date_end'])) {
+                $apiData['to'] = date('Y-m-d', $fDateEnd);
+            }
+        }
+
+        if (!empty($_GET['f-status_id'])) {
+            $apiData['state'] = implode(',', $_GET['f-status_id']);
+        }
+
+        if (!empty($_GET['f-author_user_id'])) {
+            $apiData['author_user_id'] = $_GET['f-author_user_id'];
+        }
+
+        if (!empty($_GET['f-worker_user_id'])) {
+            $apiData['worker_user_id'] = $_GET['f-worker_user_id'];
+        }
+
+        $_GET['page'] = $_GET['p_page'] ?? 1;
+        $_GET['size'] = $_GET['p_size'] ?? 10;
+
+        if ($result = $this->api->command('get', 'tasks', $apiData)) {
+            $this->cachedFilteredItems = $result['tasks'];
+            $this->itemsTotal = $result['total'];
+        }
+
+        //print_r($this->cachedFilteredItems);exit;
+
+        return $this->cachedFilteredItems;
+    }
+
+    public function getFilteredItemsOld()
     {
         $itemsRaw = $this->getItems();
 
