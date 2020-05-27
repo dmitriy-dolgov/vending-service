@@ -29,4 +29,23 @@ class Divisions extends ItemCache
 
         return $items;
     }
+
+    /*public function getCityNameByDivisionAddress($divisionName)
+    {
+        $divisionName = trim($divisionName, ", \t\n\r\0\x0B");
+
+//        foreach ($this->getItems() as $item) {
+//            if ($divisionName == trim($item['description'], ", \t\n\r\0\x0B")) {
+//                return ' ++ ' . $item['city_id'];
+//            }
+//        }
+
+        foreach ($this->getItems() as $item) {
+            if ($divisionName == trim($item['address'], ", \t\n\r\0\x0B")) {
+                return $item['city_id'];
+            }
+        }
+
+        return '';
+    }*/
 }
