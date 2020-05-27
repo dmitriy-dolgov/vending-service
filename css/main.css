@@ -94,6 +94,10 @@ body {
   font-weight: 400;
 }
 
+button:focus {
+  outline: none;
+}
+
 @media (min-width: 992px) {
   .fields-row .col-lg {
     max-width: 20%;
@@ -757,6 +761,20 @@ h4 {
 
 .dropdown-item {
   white-space: normal;
+}
+
+#modal-remove-task .heading {
+  line-height: 3em;
+}
+
+.mat-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-icon-button:focus {
+  background-color: #EEE;
 }
 
 /*# sourceMappingURL=main.css.map */
