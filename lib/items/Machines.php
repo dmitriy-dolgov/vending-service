@@ -16,8 +16,14 @@ class Machines extends ItemCache
 
     protected function getItemsFromPrimaryRepository()
     {
-        // здесь не надо делать 'size' => 999999, чтобы вернуть записей больше чем 20, но проследить на будущее если что
-        return $this->api->command('get', 'machines', ['token' => $this->api::API_KEY]);
+        if ($result = $this->api->command('get', 'machines', [
+            'token' => $this->api::API_KEY,
+            'size' => 999999,
+        ])) {
+            return $result['machines'];
+        }
+
+        return [];
     }
 
     public function getUnifiedItems()
