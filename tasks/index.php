@@ -75,30 +75,14 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                             <div class="col-xl col-md-3 col-6 order-xl-3 order-md-5">
                                 <div class="item-heading fsz-9 text-nowrap">Создатель</div>
                                 <div class="fsz-12">
-                                <span class="text-dark ng-star-inserted"><?php
-                                    //TODO: вынести функционал в отдельный класс
-                                    $uName = '';
-                                    if (!empty($htmlUsers->getItemsKeyMapped()[$item['author_user_id']])) {
-                                        $uName = trim($htmlUsers->getItemsKeyMapped()[$item['author_user_id']]['name'] ?? '');
-                                        $uName = trim($uName ?: $htmlUsers->getItemsKeyMapped()[$item['author_user_id']]['phone_number']);
-                                        $uName = trim($uName ?: $htmlUsers->getItemsKeyMapped()[$item['author_user_id']]['email']);
-                                    }
-                                    echo $uName ?: '&nbsp;';
-                                    ?></span></div>
+                                    <span class="text-dark ng-star-inserted"><?= (trim($item['author_name']) ?: trim($item['author_phone'])) ?: '&nbsp;' ?></span>
+                                </div>
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-4 order-md-6">
                                 <div class="item-heading fsz-9 text-nowrap">Исполнитель</div>
                                 <div class="fsz-12">
-                                <span class="text-dark ng-star-inserted"><?php
-                                    //TODO: вынести функционал в отдельный класс
-                                    $uName = '';
-                                    if (!empty($htmlUsers->getItemsKeyMapped()[$item['worker_user_id']])) {
-                                        $uName = trim($htmlUsers->getItemsKeyMapped()[$item['worker_user_id']]['name'] ?? '');
-                                        $uName = trim($uName ?: $htmlUsers->getItemsKeyMapped()[$item['worker_user_id']]['phone_number']);
-                                        $uName = trim($uName ?: $htmlUsers->getItemsKeyMapped()[$item['worker_user_id']]['email']);
-                                    }
-                                    echo $uName ?: '&nbsp;';
-                                    ?></span></div>
+                                    <span class="text-dark ng-star-inserted"><?= (trim($item['worker_name']) ?: trim($item['worker_phone'])) ?: '&nbsp;' ?></span>
+                                </div>
                             </div>
                             <div class="col-xl col-md-3 col-6 order-xl-5 order-md-2">
                                 <div class="item-heading fsz-9 text-nowrap">Статус</div>
