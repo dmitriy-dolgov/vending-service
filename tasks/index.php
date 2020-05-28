@@ -47,8 +47,9 @@ $('[data-target="#modal-remove-task"]').click(function() {
   var taskId = $(this).data('task-id');
   $('[name="removed-task-guid"]').val(taskId);
 });
-
 JS;
+
+$filteredItems = $htmlTasks->getFilteredItems();
 
 ?>
     <div class="py-4">
@@ -57,7 +58,6 @@ JS;
 
         <ul class="list-group app-list-group mt-4 mb-5 ng-star-inserted">
             <?php
-            $filteredItems = $htmlTasks->getFilteredItems();
             if ($filteredItems):
                 foreach ($filteredItems as $item):
                     ?>

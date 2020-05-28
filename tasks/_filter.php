@@ -54,13 +54,16 @@ $(document).ready(function(){
     });
 });
 JS;
+
+$tasksCaption = (count($filteredItems) != $htmlTasks->getItemCount()) ? 'Задачи' : 'Все задачи';
+
 ?>
 <form autocomplete="off" class="task-filters ng-untouched ng-pristine ng-invalid" method="post"
       action="<?= $_SERVER['REQUEST_URI'] ?>">
     <input type="hidden" name="action" value="filter">
     <div class="row">
         <div class="col-xl-2 col-lg-3 col-sm-12 col-6">
-            <h1 class="page-title">Задачи (<span class="task-amount"><?= $htmlTasks->getItemCount() ?></span>)</h1>
+            <h1 class="page-title"><?= Html::encode($tasksCaption) ?> (<span class="task-amount"><?= $htmlTasks->getItemCount() ?></span>)</h1>
         </div>
         <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-lg-0 mt-sm-2">
             <button class="btn app-btn btn-primary-dark btn-add-task" type="button" data-toggle="modal"
