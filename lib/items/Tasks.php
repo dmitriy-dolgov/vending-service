@@ -92,8 +92,8 @@ class Tasks extends ItemCache
             $apiData['worker_user_id'] = $_GET['f-worker_user_id'];
         }
 
-        $_GET['page'] = $_GET['p_page'] ?? 1;
-        $_GET['size'] = $_GET['p_size'] ?? 10;
+        $apiData['page'] = $_GET['p_page'] ?? 1;
+        $apiData['size'] = $_GET['p_size'] ?? 10;
 
         if ($result = $this->api->command('get', 'tasks', $apiData)) {
             $this->cachedFilteredItems = $result['tasks'];
