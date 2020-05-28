@@ -42,6 +42,14 @@ $htmlStatuses = new Statuses();
 
 $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
 
+$GLOBALS['html-code']['js'][] = <<<JS
+$('[data-target="#modal-remove-task"]').click(function() {
+  var taskId = $(this).data('task-id');
+  $('[name="removed-task-guid"]').val(taskId);
+});
+
+JS;
+
 ?>
     <div class="py-4">
 
@@ -100,7 +108,8 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                                                                                 style="display: block; background-image: url(/img/ic_edit.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></div></span>
                                     </button>
                                     <button class="mx-2 mat-icon-button" data-toggle="modal"
-                                            data-target="#modal-remove-task"><span
+                                            data-target="#modal-remove-task"
+                                            data-task-id="<?= Html::encode($item['guid']) ?>"><span
                                                 class="mat-button-wrapper"><div class="app-icon"
                                                                                 style="display: block; background-image: url(/img/ic_delete.png); min-height: 32px; min-width: 32px; height: 32px; width: 32px;"></div></span>
                                     </button>
@@ -186,6 +195,7 @@ $paginator = new \helpers\Paginator($htmlTasks->getItemCount());
                     <form autocomplete="off" class="ng-pristine ng-invalid ng-untouched" method="post"
                           action="/tasks/remove.php">
                         <input type="hidden" name="action" value="remove-task">
+                        <input type="hidden" name="removed-task-guid">
                         <div class="mat-dialog-actions">
                             <button class="btn app-btn btn-danger" type="submit">Удалить
                             </button>

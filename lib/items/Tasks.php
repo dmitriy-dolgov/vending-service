@@ -194,4 +194,9 @@ class Tasks extends ItemCache
 
         return $apiResult;
     }
+
+    public function deleteItem($itemId)
+    {
+        return $this->api->command('delete', 'tasks/' . urlencode($itemId), ['token' => $this->api::API_KEY]);
+    }
 }

@@ -25,6 +25,11 @@ class Api
                 $result = $this->cmdPost($path, $query, $params);
                 break;
             }
+            case 'delete':
+            {
+                $result = $this->cmdDelete($path, $query, $params);
+                break;
+            }
             default:
             {
                 throw new \Exception('Wrong method: ' . $method);
@@ -43,6 +48,23 @@ class Api
             'headers' => ['Content-Type' => 'application/json-patch+json'],
             'body' => json_encode($params),
         ]);
+
+        if ($request->getStatusCode() == 200) {
+            //$response = $request->getBody();
+            return true;
+        }
+
+        //TODO: обработка (логирование) ошибки
+
+        return false;
+    }
+
+    protected function cmdDelete(string $path, array $query = [])
+    {
+        $client = new Client();
+
+        $url = self::API_URL . '/' . $path . ($query ? ('?' . http_build_query($query)) : '');
+        $request = $client->delete($url);
 
         if ($request->getStatusCode() == 200) {
             //$response = $request->getBody();
